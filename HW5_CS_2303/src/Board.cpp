@@ -32,6 +32,18 @@ void Board::displayBoard()
 void Board::printToFile(char* filename)
 {
     //TODO
+	ofstream fp;
+	fp.open(filename);
+	int ncols=n;
+	for(int row = 0; row<ncols; row++)
+		{
+			for(int col = 0; col<ncols; col++)
+			{
+				fp<<*((edgesP)+(row*ncols)+col)<<" ";
+			}
+			fp<<"\n";
+		}
+	fp.close();
 }
 void Board::init()
 {
