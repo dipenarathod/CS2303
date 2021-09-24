@@ -8,6 +8,9 @@
 #ifndef BOARD_H_
 #define BOARD_H_
 #include <stdio.h>
+#include <iostream>
+#include<fstream>
+using namespace std;
 
 class Board {
 public:
