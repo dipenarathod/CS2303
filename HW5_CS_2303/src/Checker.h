@@ -22,6 +22,7 @@ public:
 	int getRow();
 	int getCol();
 	char getPlayerColor();
+	void makeKing();
 	bool isKing;
 private:
 	int row;
