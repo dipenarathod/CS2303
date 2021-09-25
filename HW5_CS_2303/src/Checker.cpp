@@ -32,7 +32,7 @@ void Checker::moveDiagonalRight(){
 		this->row-=1;
 		this->col+=1;
 	}
-	else if(this->getPlayerColor()=='r' || this->getPlayerColor()=='R'){
+	if(this->getPlayerColor()=='r' || this->getPlayerColor()=='R'){
 		this->row+=1;
 		this->col-=1;
 	}
