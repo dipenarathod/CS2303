@@ -23,6 +23,7 @@ public:
 	int getCol();
 	char getPlayerColor();
 	void makeKing();
+	bool checkVaild(char);
 	bool isKing;
 private:
 	int row;
