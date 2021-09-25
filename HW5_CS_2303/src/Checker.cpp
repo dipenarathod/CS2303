@@ -86,11 +86,12 @@ char Checker::getPlayerColor(){
 }
 void Checker::makeKing(){
 	if(((this->row)==8)&&((this->playerColor)=='r')){
-		playerColor='R';
+		setPlayerColor('R');
 		isKing=true;
 	}
-	else if(((this->row)==1)&&((this->playerColor)=='b')){
-		playerColor='B';
+	if(((this->row)==1)&&((this->playerColor)=='b')){
+		setPlayerColor('B');
 		isKing=true;
 	}
 }
+
