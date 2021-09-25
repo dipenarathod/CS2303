@@ -94,4 +94,22 @@ void Checker::makeKing(){
 		isKing=true;
 	}
 }
+bool Checker::checkVaild(char holder){
+	bool vaild=true;
+	if((((this->row)+1)>8)||(((this->col)+1)>8)||(((this->row)-1)<0)||(((this->col)-1)<0)){
+		vaild=false;
+		cout<<"off the board make a different move"<<endl;
+	}
+	if((holder=='r')&&(this->playerColor!='r'))
+	{
+		vaild=false;
+		cout<<"opposition piece is here check if you can jump"<<endl;
+		
+	}
+	if((holder=='r')&&(this->playerColor=='r')){
+		cout<<"cannot move to where one of your piece already is"<<endl;
+	}
+	
+	return vaild;
+}
 
