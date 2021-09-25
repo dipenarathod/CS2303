@@ -84,3 +84,13 @@ int Checker::getCol(){
 char Checker::getPlayerColor(){
 	return this->playerColor;
 }
+void Checker::makeKing(){
+	if(((this->row)==8)&&((this->playerColor)=='r')){
+		playerColor='R';
+		isKing=true;
+	}
+	else if(((this->row)==1)&&((this->playerColor)=='b')){
+		playerColor='B';
+		isKing=true;
+	}
+}
