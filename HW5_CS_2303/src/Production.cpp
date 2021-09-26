@@ -40,13 +40,13 @@ bool Production::prod(int argc, char* argv[])
 	{
 		printf("Found %d interesting arguments.\n", argc-1);
 		fflush(stdout);
-		bool turn;
 		for(int i = 1; i<argc; i++) //don't want to read argv[0]
 		{//argv[i] is a string
 			switch(i)
 			{
 			case 1:
-				theBoard->setTurn(argv[i]);
+				this->setTurn(argv[i]);
+				this->amGoingFirst=argv[i];
 				break;
 			default:
 				puts("Unexpected argument count."); fflush(stdout);
@@ -61,8 +61,9 @@ bool Production::prod(int argc, char* argv[])
 		puts("Back from read file"); fflush(stdout);
 		theBoard->displayBoard();
 
-		printf("%d\n",redCheckers[0]->getRow());fflush(stdout);
-
+		printf("%d\n",redCheckers[0]->getCol());fflush(stdout);
+		pieceMove move=getPlayerMove(redCheckers,blackCheckers);
+		printf("%d\n",move.row);
 
 
 
@@ -75,7 +76,6 @@ bool Production::prod(int argc, char* argv[])
 bool Production::readFile(char* filename, Board* theBoard,Checker** red,Checker** black)
 {
 	bool ok = true;
-	char temp = '-';
 	FILE* fp = fopen(filename, "r"); //read the file
 
 	if (fp == NULL)
@@ -156,5 +156,52 @@ bool Production::getYesNo(char* query)
 
 
 	return answer;
+}
+
+bool Production::getTurn(){
+	return this->turn;
+}
+
+void Production::switchTurn(){
+	this->turn=!this->turn;
+}
+
+void Production::setTurn(bool turn){
+	this->turn=turn;
+}
+
+pieceMove Production::getPlayerMove(Checker** red,Checker** black){
+	pieceMove move;
+	bool foundPiece=false;
+	bool correctMoveDirection=false;
+	printf("Enter row of piece:\n");fflush(stdout);
+	scanf("%d",&(move.row));fflush(stdin);
+	printf("Enter column of piece:\n");fflush(stdout);
+	scanf("%d",&(move.col));fflush(stdin);
+	printf("Enter direction:\n");fflush(stdout);
+	scanf("%c",&(move.move));fflush(stdin);
+	if(move.move=='i' ||move.move=='o' || move.move=='j' || move.move=='k'){
+		correctMoveDirection=true;
+	}
+	if(this->amGoingFirst){
+		for(int i=0;i<12;i++){
+			if(black[i]->getRow()==move.row && black[i]->getCol()==move.col){
+				foundPiece=true;
+				printf("%d,%d,%c\n",move.row,move.col,move.move);
+			}
+		}
+	}
+	else{
+		for(int i=0;i<12;i++){
+			if(red[i]->getRow()==move.row && red[i]->getCol()==move.col){
+				foundPiece=true;
+			}
+		}
+	}
+	if(!(foundPiece && correctMoveDirection)){
+		printf("Invalid row, or column, or direction\n");
+		return getPlayerMove(red,black);
+	}
+	return move;
 }
 
