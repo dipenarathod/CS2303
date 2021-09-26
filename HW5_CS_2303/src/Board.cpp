@@ -6,6 +6,7 @@
  */
 
 #include "Board.h"
+#include <ostream>
 
 Board::Board() {
 	// TODO Auto-generated constructor stub
