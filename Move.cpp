@@ -8,15 +8,17 @@ int right = 0, left = 0, up = 0;
 				if (up >= 0)
 				{
 					if (right >= 1 && right <= 8) {
-						if (theBoard->getEdge(up,right)== 'r')
+						if (theBoard->getEdge(up,right) == 'r')
 						{
 							up -= 1;
 							right += 1;
 							if (up >= 0 && right >= 1 && right <= 8)
 							{
+								if(theBoard->getEdge(up, right) == '-'){
 								theBoard->setEdge(up, right, 'b');
 								theBoard->setEdge((up+1), (right-1), '-');
 								theBoard->setEdge(i,j,'-');
+								}
 							}
 						}
 					} // End if right
@@ -29,9 +31,12 @@ int right = 0, left = 0, up = 0;
 							if (up >= 0 && left >= 0 && left <= 7)
 							{
 								puts("Can jump on left");
-								theBoard->setEdge(up, left, 'b');
-								theBoard->setEdge((up+1),(left+1),'-');
-								theBoard->setEdge(i,j,'-');
+								if(theBoard->getEdge(up, left) == '-'){
+									theBoard->setEdge(up, left, 'b');
+									theBoard->setEdge((up+1),(left+1),'-');
+									theBoard->setEdge(i,j,'-');
+								}
+
 							}
 						}
 					} // End if left
