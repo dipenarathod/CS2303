@@ -85,31 +85,13 @@ char Checker::getPlayerColor(){
 	return this->playerColor;
 }
 void Checker::makeKing(){
-	if(((this->row)==8)&&((this->playerColor)=='r')){
+	if(((this->row)==7)&&((this->playerColor)=='r')){
 		setPlayerColor('R');
 		isKing=true;
 	}
-	if(((this->row)==1)&&((this->playerColor)=='b')){
+	if(((this->row)==0)&&((this->playerColor)=='b')){
 		setPlayerColor('B');
 		isKing=true;
 	}
-}
-bool Checker::checkVaild(char holder){
-	bool vaild=true;
-	if((((this->row)+1)>8)||(((this->col)+1)>8)||(((this->row)-1)<0)||(((this->col)-1)<0)){
-		vaild=false;
-		cout<<"off the board make a different move"<<endl;
-	}
-	if((holder=='r')&&(this->playerColor!='r'))
-	{
-		vaild=false;
-		cout<<"opposition piece is here check if you can jump"<<endl;
-		
-	}
-	if((holder=='r')&&(this->playerColor=='r')){
-		cout<<"cannot move to where one of your piece already is"<<endl;
-	}
-	
-	return vaild;
 }
 
