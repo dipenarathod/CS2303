@@ -22,6 +22,10 @@ void Board::displayBoard()
 	//TODO
 	ofstream boards;
 	boards.open("boards.txt", ios_base::app);
+
+	//ofstream gameState;
+	//gameState.open("gameState.txt");
+
 	printf("  0 1 2 3 4 5 6 7 \n");
 	boards<<"  0 1 2 3 4 5 6 7 \n";
 	for(int i = 0; i<8; i++)
@@ -32,11 +36,14 @@ void Board::displayBoard()
 			{
 				printf(" %c",(*this).getEdge(i, j));
 				boards<<" "<<(*this).getEdge(i, j);
+				//gameState<<(*this).getEdge(i,j);
 			}
 			printf("\n");
 		    boards<< "\n";
+		    //gameState<<"\n";
 		}
 	boards.close();
+	//gameState.close();
 }
 
 //void Board::printToFile(char* filename)
