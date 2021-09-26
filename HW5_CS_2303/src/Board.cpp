@@ -32,18 +32,6 @@ void Board::displayBoard()
 void Board::printToFile(char* filename)
 {
     //TODO
-	ofstream fp;
-	fp.open(filename);
-	int ncols=n;
-	for(int row = 0; row<ncols; row++)
-		{
-			for(int col = 0; col<ncols; col++)
-			{
-				fp<<*((edgesP)+(row*ncols)+col)<<" ";
-			}
-			fp<<"\n";
-		}
-	fp.close();
 }
 void Board::init()
 {
@@ -84,14 +72,4 @@ char* Board::getEdgesP(){
 	return (*this).edgesP;
 }
 
-bool Board::getTurn(){
-	return this->turn;
-}
 
-void Board::switchTurn(){
-	this->turn=!this->turn;
-}
-
-void Board::setTurn(bool turn){
-	this->turn=turn;
-}
