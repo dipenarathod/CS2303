@@ -18,6 +18,11 @@
 
 #define FILENAMELENGTHALLOWANCE 50
 
+typedef struct{
+	int row;
+	int col;
+	char move;
+}pieceMove;
 class Production {
 public:
 	Production();
@@ -25,9 +30,13 @@ public:
 	bool prod(int argc, char* argv[]);
 	bool readFile(char*, Board*,Checker**,Checker**);
 	bool getYesNo(char* query);
+	bool getTurn();
+	void switchTurn();
+	void setTurn(bool turn);
+	pieceMove getPlayerMove(Checker**,Checker**);
 
 private:
-
+	bool turn;
+	bool amGoingFirst;
 };
-
 #endif /* PRODUCTION_H_ */
