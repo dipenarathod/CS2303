@@ -56,6 +56,10 @@ bool Production::prod(int argc, char* argv[])
 		}//end of for loop on argument count
 		puts("after reading arguments"); fflush(stdout);
 		//we'll want to read the file
+		ofstream boards;
+		boards.open("boards.txt");
+		boards<<"Here goes nothing \n";
+		boards.close();
 		puts("Before read file"); fflush(stdout);
 		answer = readFile("originalBoard.txt", theBoard,redCheckers,blackCheckers); //read the file
 		puts("Back from read file"); fflush(stdout);
