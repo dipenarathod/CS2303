@@ -28,6 +28,7 @@ public:
 	bool getTurn();
 	void switchTurn();
 	void setTurn(bool);
+	void moveb();
 private:
 	char* edgesP;
 	bool turn;
