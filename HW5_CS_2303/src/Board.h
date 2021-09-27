@@ -9,8 +9,7 @@
 #define BOARD_H_
 #include <stdio.h>
 #include <iostream>
-#include <fstream>
-#include <Production.h>
+#include<fstream>
 using namespace std;
 
 class Board {
@@ -31,9 +30,7 @@ public:
 	void setTurn(bool);
 	void moveb();
 	void mover();
-	bool isWin();
-	bool isValid(int,int,Board*);
-
+	bool isValid(int,int);
 private:
 	char* edgesP;
 	bool turn;

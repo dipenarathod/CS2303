@@ -200,9 +200,9 @@ void Board::mover()
 		} // End for row
 }
 
-bool isValid(int row, int col, Board* theBoard){
+bool Board::isValid(int row, int col){
 	bool ok = false;
-	if(theBoard->getEdge(row, col) == '-')
+	if(this->getEdge(row, col) == '-')
 		ok = true;
 	return ok;
 }

@@ -69,7 +69,8 @@ bool Production::prod(int argc, char* argv[])
 		pieceMove move=getPlayerMove(redCheckers,blackCheckers);
 		printf("%d\n",move.row);
 
-		bool valid = theBoard->isValid(move.row, move.col, theBoard);
+		bool valid = theBoard->isValid(move.row, move.col);
+		printf("isValid: %b", valid);
 
 
 
