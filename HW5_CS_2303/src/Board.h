@@ -10,6 +10,7 @@
 #include <stdio.h>
 #include <iostream>
 #include<fstream>
+#include "pieceMove.h"
 using namespace std;
 
 class Board {
