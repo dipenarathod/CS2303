@@ -29,19 +29,19 @@ void Board::displayBoard()
 	printf("  0 1 2 3 4 5 6 7 \n");
 	boards<<"  0 1 2 3 4 5 6 7 \n";
 	for(int i = 0; i<8; i++)
+	{
+		printf("%d", i);
+		boards<<i;
+		for(int j = 0; j<8; j++)
 		{
-			printf("%d", i);
-			boards<<i;
-			for(int j = 0; j<8; j++)
-			{
-				printf(" %c",(*this).getEdge(i, j));
-				boards<<" "<<(*this).getEdge(i, j);
-				//gameState<<(*this).getEdge(i,j);
-			}
-			printf("\n");
-		    boards<< "\n";
-		    //gameState<<"\n";
+			printf(" %c",(*this).getEdge(i, j));
+			boards<<" "<<(*this).getEdge(i, j);
+			//gameState<<(*this).getEdge(i,j);
 		}
+		printf("\n");
+		boards<< "\n";
+		//gameState<<"\n";
+	}
 	boards.close();
 	//gameState.close();
 }
@@ -104,100 +104,128 @@ char* Board::getEdgesP(){
 void Board::moveb()
 {
 	int right = 0, left = 0, up = 0;
-		//check if can jump
-		for (int i = 0; i < 8; i++)
-		{
-			for (int j = 0; j < 8; j++) {
-				if (this->getEdge(i,j) == 'b') {
-					up = i - 1; right = j + 1; left = j - 1;
-					if (up >= 0)
-					{
-						if (right >= 1 && right <= 8) {
-							if (this->getEdge(up,right)== 'r')
+	//check if can jump
+	for (int i = 0; i < 8; i++)
+	{
+		for (int j = 0; j < 8; j++) {
+			if (this->getEdge(i,j) == 'b') {
+				up = i - 1; right = j + 1; left = j - 1;
+				if (up >= 0)
+				{
+					if (right >= 1 && right <= 8) {
+						if (this->getEdge(up,right)== 'r')
+						{
+							up -= 1;
+							right += 1;
+							if (up >= 0 && right >= 1 && right <= 8)
 							{
-								up -= 1;
-								right += 1;
-								if (up >= 0 && right >= 1 && right <= 8)
+								if(this->getEdge(up,right)=='-')
 								{
-									if(this->getEdge(up,right)=='-')
-									{
-										this->setEdge(up, right, 'b');
-										this->setEdge((up+1), (right-1), '-');
-										this->setEdge(i,j,'-');
-									}
+									this->setEdge(up, right, 'b');
+									this->setEdge((up+1), (right-1), '-');
+									this->setEdge(i,j,'-');
 								}
 							}
-						} // End if right
-						if (left >= 0 && left <= 7)
+						}
+					} // End if right
+					if (left >= 0 && left <= 7)
+					{
+						if (this->getEdge(up,left) == 'r')
 						{
-							if (this->getEdge(up,left) == 'r')
+							up -= 1;
+							left -= 1;
+							if (up >= 0 && left >= 0 && left <= 7)
 							{
-								up -= 1;
-								left -= 1;
-								if (up >= 0 && left >= 0 && left <= 7)
-								{
-									puts("Can jump on left");
-									if(this->getEdge(up,left)=='-'){
+								puts("Can jump on left");
+								if(this->getEdge(up,left)=='-'){
 									this->setEdge(up, left, 'b');
 									this->setEdge((up+1),(left+1),'-');
 									this->setEdge(i,j,'-');
-									}
 								}
 							}
-						} // End if left
-					}// End if up
-				} // End if b
-			} // End for col
-		} // End for row
+						}
+					} // End if left
+				}// End if up
+			} // End if b
+		} // End for col
+	} // End for row
 }
 void Board::mover()
 {
 	int right = 0, left = 0, up = 0;
-		//check if can jump
-		for (int i = 0; i < 8; i++)
-		{
-			for (int j = 0; j < 8; j++) {
-				if (this->getEdge(i,j) == 'r') {
-					up = i + 1; right = j + 1; left = j - 1;
-					if (up <= 8)
-					{
-						if (right >= 1 && right <= 8) {
-							if (this->getEdge(up,right)== 'r')
+	//check if can jump
+	for (int i = 0; i < 8; i++)
+	{
+		for (int j = 0; j < 8; j++) {
+			if (this->getEdge(i,j) == 'r') {
+				up = i + 1; right = j + 1; left = j - 1;
+				if (up <= 8)
+				{
+					if (right >= 1 && right <= 8) {
+						if (this->getEdge(up,right)== 'r')
+						{
+							up += 1;
+							right += 1;
+							if (up <= 0 && right >= 1 && right <= 8)
 							{
-								up += 1;
-								right += 1;
-								if (up <= 0 && right >= 1 && right <= 8)
+								if(this->getEdge(up,right)=='-')
 								{
-									if(this->getEdge(up,right)=='-')
-									{
-										this->setEdge(up, right, 'r');
-										this->setEdge((up-1), (right-1), '-');
-										this->setEdge(i,j,'-');
-									}
+									this->setEdge(up, right, 'r');
+									this->setEdge((up-1), (right-1), '-');
+									this->setEdge(i,j,'-');
 								}
 							}
-						} // End if right
-						if (left >= 0 && left <= 7)
+						}
+					} // End if right
+					if (left >= 0 && left <= 7)
+					{
+						if (this->getEdge(up,left) == 'b')
 						{
-							if (this->getEdge(up,left) == 'b')
+							up += 1;
+							left -= 1;
+							if (up <= 0 && left >= 0 && left <= 7)
 							{
-								up += 1;
-								left -= 1;
-								if (up <= 0 && left >= 0 && left <= 7)
-								{
-									puts("Can jump on left");
-									if(this->getEdge(up,left)=='-'){
+								puts("Can jump on left");
+								if(this->getEdge(up,left)=='-'){
 									this->setEdge(up, left, 'r');
 									this->setEdge((up-1),(left+1),'-');
 									this->setEdge(i,j,'-');
-									}
 								}
 							}
-						} // End if left
-					}// End if up
-				} // End if r
-			} // End for col
-		} // End for row
+						}
+					} // End if left
+				}// End if up
+			} // End if r
+		} // End for col
+	} // End for row
+}
+
+bool Board::isWin(){
+	int redPieces=0;
+	int blackPieces=0;
+	for(int i = 0; i<8; i++)
+	{
+		for(int j = 0; j<8; j++)
+		{
+			if('r'==(*this).getEdge(i, j) || 'R'==(*this).getEdge(i, j)){
+				redPieces++;
+			}
+			else if('b'==(*this).getEdge(i, j) || 'B'==(*this).getEdge(i, j)){
+				blackPieces++;
+			}
+		}
+	}
+	if(redPieces==0){
+		printf("Black won\n");
+		return true;
+	}
+	else if(blackPieces==0){
+		printf("Red won\n");
+		return true;
+	}
+	else{
+		return false;
+	}
 }
 
 bool Board::isValid(int row, int col){
@@ -206,5 +234,3 @@ bool Board::isValid(int row, int col){
 		ok = true;
 	return ok;
 }
-
-
