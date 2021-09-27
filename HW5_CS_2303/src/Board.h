@@ -31,11 +31,9 @@ public:
 	void setTurn(bool);
 	void moveb();
 	void mover();
-<<<<<<< Updated upstream
 	bool isWin();
-=======
 	bool isValid(int,int,Board*);
->>>>>>> Stashed changes
+
 private:
 	char* edgesP;
 	bool turn;
