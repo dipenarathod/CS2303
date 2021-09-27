@@ -11,6 +11,7 @@
 #include <iostream>
 #include<fstream>
 #include "pieceMove.h"
+#include  "Checker.h"
 using namespace std;
 
 class Board {
@@ -18,7 +19,7 @@ public:
 	Board();
 	virtual ~Board();
 	void displayBoard();
-	void printToFile(char* filename);
+	void printToFile(char* filename,Checker**,Checker**);
 	void setEdge(int row, int col, char player);
 	char getEdge(int row, int col); //Returns binary value on adjMatrix given a row and a col
 	void init();
