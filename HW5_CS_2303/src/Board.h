@@ -31,6 +31,7 @@ public:
 	void setTurn(bool);
 	void moveb();
 	void mover();
+	bool isWin();
 	bool isValid(int,int);
 private:
 	char* edgesP;
