@@ -27,6 +27,7 @@ bool Tests::tests()
 	bool ok2 = testFileOutput();
 	bool ok3 = testMakeLList();
 	bool ok4 = testEnqueue();
+	bool ok5 = testGotAdjacencyMatrix();
 	//pedagogical bool ok5 = testRemoveFromList();
 	bool ok6 = testPrintHistory();
 
@@ -34,7 +35,7 @@ bool Tests::tests()
 	bool ok8= testMoveDiagonalRight();
 	bool ok9= testMoveBackDiagonalLeft();
 	bool ok10= testMoveBackDiagonalRight();
-	answer = ok1 && ok3 && ok4  && ok6 && ok7 && ok8 && ok10;
+	answer = ok1 && ok3 && ok4  && ok5 && ok6 && ok7 && ok8 && ok10;
 	return answer;
 }
 
@@ -72,6 +73,21 @@ bool Tests::testReadFile()
 bool Tests::testEnqueue()
 {
 	bool ok = true;
+	std::cout << "Running Test Enqueue" << std::endl;
+
+	LinkedList lList;
+	LLNode* disListP = lList.makeEmptyLinkedList();
+	CheckerLoc* moveP = (CheckerLoc*)malloc(sizeof(CheckerLoc));
+	moveP->roomNumber=3;
+	moveP->treasure=4;
+
+	lList.savePayload(disListP, moveP);
+	Payload* dis =lList.dequeueLIFO(disListP);
+	if(((dis->roomNumber)!=3)&&((dis->treasure)!=4))
+	{
+		ok=false;
+	}
+
 	if(ok)
 	{
 		puts("testEnqueue did pass");
@@ -82,23 +98,42 @@ bool Tests::testEnqueue()
 	}
 	return ok;
 }
+
 bool Tests::testGotAdjacencyMatrix()
 {
-	bool ok = true;
-	if(ok)
-	{
-		puts("testGotAdjacencyMatrix did pass");
+	bool ans = true;
+
+	std::cout << "Running testGotAdjacencyMatrix" << std::endl;
+
+	Board* theBoard=(Board*)malloc(sizeof(Board));
+	int howManySpots=12;
+	theBoard->setEdgesP((char*) malloc(howManySpots * howManySpots *sizeof(int)));
+	theBoard->init();
+	for(int i=1;i<3;i++){
+		theBoard->setEdgesP(theBoard->getEdgesP()+i);
+		if(*(theBoard->getEdgesP())!=0){
+			ans=false;
+			puts("testGotAdjacencyMatrix fails");
+		}
 	}
-	else
-	{
-		puts("testGotAdjacencyMatrix did not pass.");
-	}
-	return ok;
+	puts("testGotAdjacencyMatrix passes");
+	free(theBoard);
+
+	return ans;
 }
 
 bool Tests::testMakeLList()
 {
 	bool ok = true;
+	LinkedList llList;
+	std::cout << "Running testMakeLList" << std::endl;
+	LLNode* theListP = llList.makeEmptyLinkedList();
+	bool rightAnswer = true;
+	bool answer = llList.isEmpty(theListP);
+	if(answer!=rightAnswer)
+	{
+		ok = false;
+	}
 	if(ok)
 	{
 		puts("testMakeLList did pass");
@@ -279,34 +314,33 @@ bool Tests::testMoveBackDiagonalLeft(){
 
 bool Tests::testMoveBackDiagonalRight(){
 	Checker* checker1=new Checker;
-		bool answer1=false;
-		checker1->setColumn(4);
-		checker1->setRow(4);
-		checker1->setPlayerColor('B');
-		checker1->moveBackDiagonalRight();
-		if(checker1->getRow()==5 && checker1->getCol()==5){
-			answer1=true;
-		}
+	bool answer1=false;
+	checker1->setColumn(4);
+	checker1->setRow(4);
+	checker1->setPlayerColor('B');
+	checker1->moveBackDiagonalRight();
+	if(checker1->getRow()==5 && checker1->getCol()==5){
+		answer1=true;
+	}
 
-		Checker* checker2=new Checker;
-		bool answer2=false;
-		checker2->setColumn(4);
-		checker2->setRow(4);
-		checker2->setPlayerColor('R');
-		checker2->moveBackDiagonalRight();
-		if(checker2->getRow()==3 && checker2->getCol()==3){
-			answer2=true;
-		}
+	Checker* checker2=new Checker;
+	bool answer2=false;
+	checker2->setColumn(4);
+	checker2->setRow(4);
+	checker2->setPlayerColor('R');
+	checker2->moveBackDiagonalRight();
+	if(checker2->getRow()==3 && checker2->getCol()==3){
+		answer2=true;
+	}
 
-		if(answer1&&answer2){
-			printf("testMoveBackDiagonalRight passed\n");
-			fflush(stdout);
-			return true;
-		}
-		else{
-			printf("testMoveBackDiagonalRight fails\n");
-			fflush(stdout);
-			return false;
-		}
+	if(answer1&&answer2){
+		printf("testMoveBackDiagonalRight passed\n");
+		fflush(stdout);
+		return true;
+	}
+	else{
+		printf("testMoveBackDiagonalRight fails\n");
+		fflush(stdout);
+		return false;
+	}
 }
-
