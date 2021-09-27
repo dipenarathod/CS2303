@@ -17,12 +17,6 @@
 
 
 #define FILENAMELENGTHALLOWANCE 50
-
-typedef struct{
-	int row;
-	int col;
-	char move;
-}pieceMove;
 class Production {
 public:
 	Production();
