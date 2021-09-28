@@ -234,3 +234,38 @@ bool Board::isValid(int row, int col){
 		ok = true;
 	return ok;
 }
+
+bool Board::canMove(int row, int col)
+{
+	bool moving = true;
+
+	if((0 <= row && row <= 8) && (0 <= col && col <= 8))
+	{
+		pieceMove i;
+		i.row = row;
+		i.col = col;
+		i.move = 'i';
+		
+		pieceMove o;
+		o.row = row;
+		o.col = col;
+		o.move = 'o';
+		
+		pieceMove k;
+		k.row = row;
+		k.col = col;
+		k.move = 'k';
+		
+		pieceMove j;
+		j.row = row;
+		j.col = col;
+		j.move = 'j';
+		
+		if(!(isValid(i) || isValid(o) || isValid(k) || isValid(j)))
+		{
+			moving = false;
+		}
+	}
+
+	return moving;
+}
