@@ -231,34 +231,67 @@ bool Board::isWin(){
 bool Board::isValid(int rowIn, int colIn,char move){
 	bool ok = false;
 	int row = 0, col = 0;
-	if(move == 'i'){
-		row = rowIn -1;
-		col = colIn - 1;
-		if((row >= 0 && row <= 8) && (col >= 0 && col <= 8))
-			if(this->getEdge(row, col) == '-')
-				ok = true;
+	if(this->getEdge(rowIn, colIn) == 'b'){
+		if(move == 'i'){
+				row = rowIn -1;
+				col = colIn - 1;
+				if((row >= 0 && row <= 8) && (col >= 0 && col <= 8))
+					if(this->getEdge(row, col) == '-')
+						ok = true;
+			}
+			if(move == 'o'){
+				row =rowIn - 1;
+				col = colIn + 1;
+				if((row >= 0 && row <= 8) && (col >= 0 && col <=8))
+					if(this->getEdge(row, col) == '-')
+						ok = true;
+			}
+			if(move == 'k'){
+				row = rowIn + 1;
+				col = colIn -1;
+				if((row >= 0 && row <= 8) && (col >= 0 && col <= 8))
+					if(this->getEdge(row, col) == '-')
+						ok = true;
+			}
+			if(move == 'k'){
+				row = rowIn + 1;
+				col = colIn + 1;
+				if((row >= 0 && row <= 8) && (col >= 0 && col <= 8))
+					if(this->getEdge(row, col) == '-')
+						ok = true;
+			}
 	}
-	if(move == 'o'){
-		row =rowIn - 1;
-		col = colIn + 1;
-		if((row >= 0 && row <= 8) && (col >= 0 && col <=8))
-			if(this->getEdge(row, col) == '-')
-				ok = true;
+	else{
+		if(move == 'i'){
+				row = rowIn + 1;
+				col = colIn - 1;
+				if((row >= 0 && row <= 8) && (col >= 0 && col <= 8))
+					if(this->getEdge(row, col) == '-')
+						ok = true;
+			}
+			if(move == 'o'){
+				row =rowIn + 1;
+				col = colIn + 1;
+				if((row >= 0 && row <= 8) && (col >= 0 && col <=8))
+					if(this->getEdge(row, col) == '-')
+						ok = true;
+			}
+			if(move == 'k'){
+				row = rowIn - 1;
+				col = colIn -1;
+				if((row >= 0 && row <= 8) && (col >= 0 && col <= 8))
+					if(this->getEdge(row, col) == '-')
+						ok = true;
+			}
+			if(move == 'k'){
+				row = rowIn - 1;
+				col = colIn + 1;
+				if((row >= 0 && row <= 8) && (col >= 0 && col <= 8))
+					if(this->getEdge(row, col) == '-')
+						ok = true;
+			}
 	}
-	if(move == 'k'){
-		row = rowIn + 1;
-		col = colIn -1;
-		if((row >= 0 && row <= 8) && (col >= 0 && col <= 8))
-			if(this->getEdge(row, col) == '-')
-				ok = true;
-	}
-	if(move == 'k'){
-		row = rowIn + 1;
-		col = colIn + 1;
-		if((row >= 0 && row <= 8) && (col >= 0 && col <= 8))
-			if(this->getEdge(row, col) == '-')
-				ok = true;
-	}
+
 
 	return ok;
 
@@ -290,7 +323,7 @@ bool Board::canMove(int row, int col)
 		j.col = col;
 		j.move = 'j';
 		
-		if(!(isValid(i) || isValid(o) || isValid(k) || isValid(j)))
+		if(!(isValid(i.row,i.col,i.move) || isValid(o.row,o.col,o.move) || isValid(k.row,k.col,k.move) || isValid(j.row,j.col,j.move)))
 		{
 			moving = false;
 		}

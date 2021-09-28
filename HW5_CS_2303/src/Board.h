@@ -12,6 +12,7 @@
 #include<fstream>
 #include "pieceMove.h"
 #include  "Checker.h"
+
 using namespace std;
 
 class Board {

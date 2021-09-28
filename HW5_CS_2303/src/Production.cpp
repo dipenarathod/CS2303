@@ -6,6 +6,7 @@
  */
 
 #include "Production.h"
+#include <iostream>
 
 
 Production::Production() {
@@ -69,8 +70,8 @@ bool Production::prod(int argc, char* argv[])
 		pieceMove move=getPlayerMove(redCheckers,blackCheckers);
 		printf("%d\n",move.row);
 
-		bool valid = theBoard->isValid(move.row, move.col);
-		printf("isValid: %b", valid);
+		bool valid = theBoard->isValid(move.row, move.col,move.move);
+		std::cout << "Is valid: " << valid<< std::endl;
 
 
 
