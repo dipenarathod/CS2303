@@ -193,7 +193,12 @@ pieceMove Production::getPlayerMove(Checker** red,Checker** black){
 		for(int i=0;i<12;i++){
 			if(black[i]->getRow()==move.row && black[i]->getCol()==move.col){
 				foundPiece=true;
-				printf("%d,%d,%c\n",move.row,move.col,move.move);
+				if(move.move=='j' || move.move=='k'){
+					if(!black[i]->isKing){
+						correctMoveDirection=false;
+					}
+				}
+				//printf("%d,%d,%c\n",move.row,move.col,move.move);
 			}
 		}
 	}
@@ -201,6 +206,11 @@ pieceMove Production::getPlayerMove(Checker** red,Checker** black){
 		for(int i=0;i<12;i++){
 			if(red[i]->getRow()==move.row && red[i]->getCol()==move.col){
 				foundPiece=true;
+				if(move.move=='j' || move.move=='k'){
+					if(!red[i]->isKing){
+						correctMoveDirection=false;
+					}
+				}
 			}
 		}
 	}
@@ -210,4 +220,3 @@ pieceMove Production::getPlayerMove(Checker** red,Checker** black){
 	}
 	return move;
 }
-
