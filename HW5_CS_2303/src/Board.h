@@ -34,6 +34,7 @@ public:
 	void mover();
 	bool isWin();
 	bool isValid(int,int);
+	bool canMove(int, int);
 private:
 	char* edgesP;
 	bool turn;
