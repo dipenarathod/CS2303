@@ -33,7 +33,7 @@ public:
 	void moveb();
 	void mover();
 	bool isWin();
-	bool isValid(int,int);
+	bool isValid(int,int, char);
 	bool canMove(int, int);
 private:
 	char* edgesP;
