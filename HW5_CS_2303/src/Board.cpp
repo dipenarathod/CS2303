@@ -46,22 +46,38 @@ void Board::displayBoard()
 	//gameState.close();
 }
 
-//void Board::printToFile(char* filename)
-//{
-//    //TODO
-//	ofstream fp;
-//	fp.open(filename);
-//	int ncols=n;
-//	for(int row = 0; row<ncols; row++)
-//		{
-//			for(int col = 0; col<ncols; col++)
-//			{
-//				fp<<*((edgesP)+(row*ncols)+col)<<" ";
-//			}
-//			fp<<"\n";
-//		}
-//	fp.close();
-//}
+void Board::printToFile(char* filename, Checker** red, Checker** black)
+{
+	//TODO
+	ofstream fp;
+	fp.open(filename);
+	int ncols = n;
+	for(int row = 0; row<ncols; row++)
+	{
+		for(int col = 0; col<ncols; col++)
+		{
+			*((edgesP)+(row*ncols)+col)= '-';
+		}
+	}
+	for(int i=0;i<12;i++){
+		if(red[i]->getCol()>=0 && red[i]->getRow()>=0){
+			this->setEdge(red[i]->getRow(),red[i]->getCol(),red[i]->getPlayerColor());
+		}
+		if(black[i]->getCol()>=0 && black[i]->getRow()>=0){
+			this->setEdge(black[i]->getRow(),black[i]->getCol(),black[i]->getPlayerColor());
+		}
+	}
+	int ncols=n;
+	for(int row = 0; row<ncols; row++)
+	{
+		for(int col = 0; col<ncols; col++)
+		{
+			fp<<*((edgesP)+(row*ncols)+col)<<" ";
+		}
+		fp<<"\n";
+	}
+	fp.close();
+}
 
 void Board::init()
 {
