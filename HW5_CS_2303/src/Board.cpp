@@ -67,7 +67,6 @@ void Board::printToFile(char* filename, Checker** red, Checker** black)
 			this->setEdge(black[i]->getRow(),black[i]->getCol(),black[i]->getPlayerColor());
 		}
 	}
-	int ncols=n;
 	for(int row = 0; row<ncols; row++)
 	{
 		for(int col = 0; col<ncols; col++)
