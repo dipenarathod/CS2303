@@ -193,6 +193,7 @@ pieceMove Production::getPlayerMove(Checker** red,Checker** black){
 		for(int i=0;i<12;i++){
 			if(black[i]->getRow()==move.row && black[i]->getCol()==move.col){
 				foundPiece=true;
+				move.piece=black[i];
 				if(move.move=='j' || move.move=='k'){
 					if(!black[i]->isKing){
 						correctMoveDirection=false;
@@ -206,6 +207,7 @@ pieceMove Production::getPlayerMove(Checker** red,Checker** black){
 		for(int i=0;i<12;i++){
 			if(red[i]->getRow()==move.row && red[i]->getCol()==move.col){
 				foundPiece=true;
+				move.piece=red[i];
 				if(move.move=='j' || move.move=='k'){
 					if(!red[i]->isKing){
 						correctMoveDirection=false;
