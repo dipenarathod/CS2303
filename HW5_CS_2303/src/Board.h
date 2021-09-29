@@ -34,8 +34,8 @@ public:
 	void moveb();
 	void mover();
 	bool isWin();
-	bool isValid(int,int, char);
-	bool canMove(int, int);
+	bool isValid(pieceMove);
+	bool canMove(pieceMove);
 private:
 	char* edgesP;
 	bool turn;
