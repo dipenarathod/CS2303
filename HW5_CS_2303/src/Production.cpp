@@ -71,7 +71,7 @@ bool Production::prod(int argc, char* argv[])
 			pieceMove move=getPlayerMove(redCheckers,blackCheckers);
 			//printf("%d\n",move.row);
 
-			bool valid = theBoard->isValid(move.row, move.col,move.move);
+			bool valid = theBoard->isValid(move);
 			if(valid){
 				if(move.move == 'i'){
 					move.piece->moveDiagonalLeft();
