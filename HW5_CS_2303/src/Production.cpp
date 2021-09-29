@@ -64,14 +64,34 @@ bool Production::prod(int argc, char* argv[])
 		puts("Before read file"); fflush(stdout);
 		answer = readFile("originalBoard.txt", theBoard,redCheckers,blackCheckers); //read the file
 		puts("Back from read file"); fflush(stdout);
-		theBoard->displayBoard();
+		while(!theBoard->isWin()){
+			theBoard->displayBoard();
 
-		printf("%d\n",redCheckers[0]->getCol());fflush(stdout);
-		pieceMove move=getPlayerMove(redCheckers,blackCheckers);
-		printf("%d\n",move.row);
+			printf("%d\n",redCheckers[0]->getCol());fflush(stdout);
+			pieceMove move=getPlayerMove(redCheckers,blackCheckers);
+			//printf("%d\n",move.row);
 
-		bool valid = theBoard->isValid(move.row, move.col,move.move);
-		std::cout << "Is valid: " << valid<< std::endl;
+			bool valid = theBoard->isValid(move.row, move.col,move.move);
+			if(valid){
+				if(move.move == 'i'){
+					move.piece->moveDiagonalLeft();
+				}
+				if(move.move == 'o'){
+					move.piece->moveDiagonalRight();
+				}
+				if(move.move == 'j'){
+					move.piece->moveBackDiagonalLeft();
+				}
+				if(move.move == 'k'){
+					move.piece->moveBackDiagonalRight();
+				}
+			}
+			theBoard->printToFile("gameState.txt",redCheckers,blackCheckers);
+
+			//theBoard->mover();
+			std::cout << "Is valid: " << valid<< std::endl;
+		}
+
 
 
 
