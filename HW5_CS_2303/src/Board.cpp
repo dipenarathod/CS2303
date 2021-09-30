@@ -378,7 +378,7 @@ bool Board::canMove(int row, int col)
 		j.col = col;
 		j.move = 'j';
 
-		if(!(isValid(i.row,i.col,i.move) || isValid(o.row,o.col,o.move) || isValid(k.row,k.col,k.move) || isValid(j.row,j.col,j.move)))
+		if(!(isValid(i) || isValid(o) || isValid(k) || isValid(j)))
 		{
 			moving = false;
 		}
