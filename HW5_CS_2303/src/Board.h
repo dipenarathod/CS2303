@@ -31,11 +31,12 @@ public:
 	bool getTurn();
 	void switchTurn();
 	void setTurn(bool);
-	void moveb();
+	bool moveb();
 	void mover();
 	bool isWin();
-	bool isValid(pieceMove);
-	bool canMove(pieceMove);
+	bool canJump(pieceMove);
+	bool isValid(int,int, char);
+	bool canMove(int, int);
 private:
 	char* edgesP;
 	bool turn;

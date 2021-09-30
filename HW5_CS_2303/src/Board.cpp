@@ -116,8 +116,36 @@ void Board::setEdgesP(char* set)
 char* Board::getEdgesP(){
 	return (*this).edgesP;
 }
-void Board::moveb()
+
+bool Board::canJump(pieceMove inPiece){
+	int row = 0, col = 0;
+	bool ok = false;
+	if(inPiece.move == 'i'){
+		row = inPiece.row - 2;
+		col = inPiece.col - 2;
+		if((row >=0 && row <= 7) && (col >= 0 && col <= 7) && (this->getEdge(row, col) == '-')){
+			ok = true;
+			inPiece.piece->moveDiagonalLeft();
+			inPiece.piece->moveDiagonalLeft();
+
+		}
+	}
+	if(inPiece.move == 'o'){
+		row = inPiece.row-2;
+		col = inPiece.col +2;
+		if((row >=0 && row <= 7) && (col >= 0 && col <= 7) && (this->getEdge(row, col) == '-')){
+			ok = true;
+			this->setEdge((inPiece.row-1), (inPiece.col+1), '-');
+			inPiece.piece->moveDiagonalRight();
+			inPiece.piece->moveDiagonalRight();
+
+		}
+	}
+	return ok;
+}
+/*bool Board::moveb()
 {
+	bool ok = false;
 	int right = 0, left = 0, up = 0;
 	//check if can jump
 	for (int i = 0; i < 8; i++)
@@ -136,9 +164,8 @@ void Board::moveb()
 							{
 								if(this->getEdge(up,right)=='-')
 								{
-									this->setEdge(up, right, 'b');
-									this->setEdge((up+1), (right-1), '-');
-									this->setEdge(i,j,'-');
+									puts("Can jump on Left");
+									ok = true;
 								}
 							}
 						}
@@ -151,11 +178,9 @@ void Board::moveb()
 							left -= 1;
 							if (up >= 0 && left >= 0 && left <= 7)
 							{
-								puts("Can jump on left");
+								puts("Can jump on Right");
 								if(this->getEdge(up,left)=='-'){
-									this->setEdge(up, left, 'b');
-									this->setEdge((up+1),(left+1),'-');
-									this->setEdge(i,j,'-');
+									ok = true;
 								}
 							}
 						}
@@ -164,6 +189,7 @@ void Board::moveb()
 			} // End if b
 		} // End for col
 	} // End for row
+	return ok;
 }
 void Board::mover()
 {
@@ -213,7 +239,7 @@ void Board::mover()
 			} // End if r
 		} // End for col
 	} // End for row
-}
+}*/
 
 bool Board::isWin(){
 	int redPieces=0;
@@ -243,68 +269,72 @@ bool Board::isWin(){
 	}
 }
 
-bool Board::isValid(pieceMove move){
+bool Board::isValid(int rowIn, int colIn,char move){
 	bool ok = false;
 	int row = 0, col = 0;
-	if((move.piece)->getPlayerColor() == 'b'){
-		if(move.move == 'i'){
-				row = move.row -1;
-				col = move.col - 1;
-				if((row >= 0 && row <= 8) && (col >= 0 && col <= 8))
-					if(this->getEdge(row, col) == '-')
-						ok = true;
+	if(this->getEdge(rowIn, colIn) == 'b' || this->getEdge(rowIn, colIn) == 'B'){
+		if(move == 'i'){
+			row = rowIn - 1;
+			col = colIn - 1;
+			if((row >= 0 && row <= 8) && (col >= 0 && col <= 8)){
+				if(this->getEdge(row, col) == '-')
+					ok = true;
+
 			}
-			if(move.move == 'o'){
-				row =move.row - 1;
-				col = move.col + 1;
-				if((row >= 0 && row <= 8) && (col >= 0 && col <=8))
-					if(this->getEdge(row, col) == '-')
-						ok = true;
-			}
-			if(move.move == 'k'){
-				row = move.row + 1;
-				col = move.col -1;
-				if((row >= 0 && row <= 8) && (col >= 0 && col <= 8))
-					if(this->getEdge(row, col) == '-')
-						ok = true;
-			}
-			if(move.move == 'k'){
-				row = move.row + 1;
-				col = move.col + 1;
-				if((row >= 0 && row <= 8) && (col >= 0 && col <= 8))
-					if(this->getEdge(row, col) == '-')
-						ok = true;
-			}
+
+
+		}
+		if(move == 'o'){
+			row =rowIn - 1;
+			col = colIn + 1;
+			if((row >= 0 && row <= 8) && (col >= 0 && col <=8))
+				if(this->getEdge(row, col) == '-')
+					ok = true;
+		}
+		if(move == 'j'){
+			row = rowIn + 1;
+			col = colIn - 1;
+			if((row >= 0 && row <= 8) && (col >= 0 && col <= 8))
+				if(this->getEdge(row, col) == '-')
+					ok = true;
+		}
+		if(move == 'k'){
+			row = rowIn + 1;
+			col = colIn + 1;
+			if((row >= 0 && row <= 8) && (col >= 0 && col <= 8))
+				if(this->getEdge(row, col) == '-')
+					ok = true;
+		}
 	}
-	else{
-		if(move.move == 'i'){
-				row = move.row + 1;
-				col = move.col - 1;
-				if((row >= 0 && row <= 8) && (col >= 0 && col <= 8))
-					if(this->getEdge(row, col) == '-')
-						ok = true;
-			}
-			if(move.move == 'o'){
-				row = move.row + 1;
-				col = move.col + 1;
-				if((row >= 0 && row <= 8) && (col >= 0 && col <=8))
-					if(this->getEdge(row, col) == '-')
-						ok = true;
-			}
-			if(move.move == 'k'){
-				row = move.row - 1;
-				col = move.col -1;
-				if((row >= 0 && row <= 8) && (col >= 0 && col <= 8))
-					if(this->getEdge(row, col) == '-')
-						ok = true;
-			}
-			if(move.move == 'k'){
-				row = move.row - 1;
-				col = move.col + 1;
-				if((row >= 0 && row <= 8) && (col >= 0 && col <= 8))
-					if(this->getEdge(row, col) == '-')
-						ok = true;
-			}
+	else if(this->getEdge(rowIn, colIn) == 'r' || this->getEdge(rowIn, colIn) =='R'){
+		if(move == 'i'){
+			row = rowIn + 1;
+			col = colIn - 1;
+			if((row >= 0 && row <= 8) && (col >= 0 && col <= 8))
+				if(this->getEdge(row, col) == '-')
+					ok = true;
+		}
+		if(move == 'o'){
+			row =rowIn + 1;
+			col = colIn + 1;
+			if((row >= 0 && row <= 8) && (col >= 0 && col <=8))
+				if(this->getEdge(row, col) == '-')
+					ok = true;
+		}
+		if(move == 'j'){
+			row = rowIn - 1;
+			col = colIn -1;
+			if((row >= 0 && row <= 8) && (col >= 0 && col <= 8))
+				if(this->getEdge(row, col) == '-')
+					ok = true;
+		}
+		if(move == 'k'){
+			row = rowIn - 1;
+			col = colIn + 1;
+			if((row >= 0 && row <= 8) && (col >= 0 && col <= 8))
+				if(this->getEdge(row, col) == '-')
+					ok = true;
+		}
 	}
 
 
@@ -312,45 +342,37 @@ bool Board::isValid(pieceMove move){
 
 }
 
-bool Board::canMove(pieceMove move)
+bool Board::canMove(int row, int col)
 {
+	bool moving = true;
 
-	if((0 <= move.row && move.row <= 8) && (0 <= move.col && move.col <= 8))
+	if((0 <= row && row <= 8) && (0 <= col && col <= 8))
 	{
 		pieceMove i;
-		i.row = move.row;
-		i.col = move.col;
+		i.row = row;
+		i.col = col;
 		i.move = 'i';
-		
+
 		pieceMove o;
-		o.row = move.row;
-		o.col = move.col;
+		o.row = row;
+		o.col = col;
 		o.move = 'o';
-		
+
 		pieceMove k;
-		k.row = move.row;
-		k.col = move.col;
+		k.row = row;
+		k.col = col;
 		k.move = 'k';
-		
+
 		pieceMove j;
-		j.row = move.row;
-		j.col = move.col;
+		j.row = row;
+		j.col = col;
 		j.move = 'j';
-		
-		if((move.piece)->getPlayerColor() == 'r')
+
+		if(!(isValid(i.row,i.col,i.move) || isValid(o.row,o.col,o.move) || isValid(k.row,k.col,k.move) || isValid(j.row,j.col,j.move)))
 		{
-			return (isValid(j) || isValid(k));
-		}
-		else if((move.piece)->getPlayerColor() == 'b')
-		{
-			return (isValid(i) || isValid(o));
-		}
-		else
-		{
-			return (isValid(i) || isValid(o) || isValid(j) || isValid(k));
+			moving = false;
 		}
 	}
-}
 
 	return moving;
 }
