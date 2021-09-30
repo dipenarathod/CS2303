@@ -66,19 +66,14 @@ bool Production::prod(int argc, char* argv[])
 		puts("Back from read file"); fflush(stdout);
 		while(!theBoard->isWin()){
 			theBoard->displayBoard();
-			bool needJump = theBoard->moveb();
-			std::cout << "Need Jump: " << needJump << std::endl;
-
-
 
 			printf("%d\n",redCheckers[0]->getCol());fflush(stdout);
 			pieceMove move=getPlayerMove(redCheckers,blackCheckers);
-			//printf("%d\n",move.row);
 
 
+			bool valid = theBoard->isValid(move);
 
 
-			bool valid = theBoard->isValid(move.row, move.col,move.move);
 			if(valid){
 				if(move.move == 'i'){
 					move.piece->moveDiagonalLeft();
@@ -93,9 +88,11 @@ bool Production::prod(int argc, char* argv[])
 					move.piece->moveBackDiagonalRight();
 				}
 			}
+			else if(theBoard->canJump(move)){}
+
+			theBoard->mover();
 			theBoard->printToFile("gameState.txt",redCheckers,blackCheckers);
 
-			//theBoard->mover();
 			std::cout << "Is valid: " << valid<< std::endl;
 		}
 

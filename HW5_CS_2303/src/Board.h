@@ -35,7 +35,7 @@ public:
 	void mover();
 	bool isWin();
 	bool canJump(pieceMove);
-	bool isValid(int,int, char);
+	bool isValid(pieceMove);
 	bool canMove(int, int);
 	int computer(Checker**);
 	Checker* findChecker(int, int,Checker**,Checker**);
