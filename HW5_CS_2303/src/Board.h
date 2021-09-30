@@ -37,6 +37,9 @@ public:
 	bool canJump(pieceMove);
 	bool isValid(int,int, char);
 	bool canMove(int, int);
+	Checker* findChecker(int, int,Checker**,Checker**);
+	Checker** red;
+	Checker** black;
 private:
 	char* edgesP;
 	bool turn;
