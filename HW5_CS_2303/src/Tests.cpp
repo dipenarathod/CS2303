@@ -27,7 +27,7 @@ bool Tests::tests()
 	bool ok2 = testFileOutput();
 	bool ok3 = testMakeLList();
 	bool ok4 = testEnqueue();
-	bool ok5 = testGotAdjacencyMatrix();
+	bool ok5 = testGotBoard();
 	//pedagogical bool ok5 = testRemoveFromList();
 	bool ok6 = testPrintHistory();
 
@@ -35,7 +35,7 @@ bool Tests::tests()
 	bool ok8= testMoveDiagonalRight();
 	bool ok9= testMoveBackDiagonalLeft();
 	bool ok10= testMoveBackDiagonalRight();
-	answer = ok1 && ok3 && ok4  && ok5 && ok6 && ok7 && ok8 && ok10;
+	answer = ok1 && ok3 && ok4 && ok5 && ok6 && ok7 && ok8 && ok10;
 	return answer;
 }
 
@@ -99,24 +99,24 @@ bool Tests::testEnqueue()
 	return ok;
 }
 
-bool Tests::testGotAdjacencyMatrix()
+bool Tests::testGotBoard()
 {
 	bool ans = true;
 
-	std::cout << "Running testGotAdjacencyMatrix" << std::endl;
+	std::cout << "Running testGotBoard" << std::endl;
 
-	Board* theBoard=(Board*)malloc(sizeof(Board));
-	int howManySpots=12;
-	theBoard->setEdgesP((char*) malloc(howManySpots * howManySpots *sizeof(int)));
+	Board* theBoard=new Board();
+	int howManySpots=8;
+	theBoard->setEdgesP((char*) malloc(8 * 8 *sizeof(char)));
 	theBoard->init();
-	for(int i=1;i<3;i++){
-		theBoard->setEdgesP(theBoard->getEdgesP()+i);
-		if(*(theBoard->getEdgesP())!=0){
+	for(int i=0;i<8;i++){
+		//theBoard->setEdgesP(theBoard->getEdgesP()+i);
+		if(theBoard->getEdge(i,i)!='-'){
 			ans=false;
-			puts("testGotAdjacencyMatrix fails");
+			puts("testGotBoard fails");
 		}
 	}
-	puts("testGotAdjacencyMatrix passes");
+	puts("testGotBoard passes");
 	free(theBoard);
 
 	return ans;
