@@ -141,6 +141,20 @@ bool Board::canJump(pieceMove inPiece){
 
 		}
 	}
+	if (inPiece.move=='j'){
+		row= inPiece.row+2;
+		col= inPiece.col+2;
+		if((row >=0 && row <= 7) && (col >= 0 && col <= 7) && (this->getEdge(row, col) == '-')){
+				ok = true;		
+			}
+	}
+	if (inPiece.move=='k'){
+			row= inPiece.row+2;
+			col= inPiece.col-2;
+			if((row >=0 && row <= 7) && (col >= 0 && col <= 7) && (this->getEdge(row, col) == '-')){
+					ok = true;		
+				}
+		}
 	return ok;
 }
 /*bool Board::moveb()
