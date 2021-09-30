@@ -398,3 +398,92 @@ Checker* Board::findChecker(int row,int col,Checker** red,Checker** black){
 	}
 	return NULL;
 }
+
+int Board::computer(Checker** red)
+{
+
+	for(int i = 0; i < 13; i++)
+	{
+		pieceMove iMove;
+		iMove.row = red[i]->getRow();
+		iMove.col = red[i]->getCol();
+		iMove.move = 'i';
+
+		pieceMove oMove;
+		oMove.row = red[i]->getRow();
+		oMove.col = red[i]->getCol();
+		oMove.move = 'o';
+
+		if(red[i]->isKing)
+		{
+			pieceMove kMove;
+			kMove.row = red[i]->getRow();
+			kMove.col = red[i]->getCol();
+			kMove.move = 'k';
+
+			pieceMove jMove;
+			jMove.row = red[i]->getRow();
+			jMove.col = red[i]->getCol();
+			jMove.move = 'j';
+
+			if(this->canJump(iMove))
+			{
+				return 0;
+			}
+			if(this->canJump(oMove))
+			{
+				return 0;
+			}
+			if(this->canJump(kMove))
+			{
+				return 0;
+			}
+			if(this->canJump(jMove))
+			{
+				return 0;
+			}
+			if(this->isValid(iMove))
+			{
+				red[i]->moveDiagonalLeft();
+				return 0;
+			}
+			if(this->isValid(oMove))
+			{
+				red[i]->moveDiagonalRight();
+				return 0;
+			}
+			if(this->isValid(kMove))
+			{
+				red[i]->moveBackDiagonalRight();
+				return 0;
+			}
+			if(this->isValid(jMove))
+			{
+				red[i]->moveBackDiagonalLeft();
+				return 0;
+			}
+		}
+		else
+		{
+			if(this->canJump(iMove))
+			{
+				return 0;
+			}
+			if(this->canJump(oMove))
+			{
+				return 0;
+			}
+			if(this->isValid(iMove))
+			{
+				red[i]->moveDiagonalLeft();
+				return 0;
+			}
+			if(this->isValid(oMove))
+			{
+				red[i]->moveDiagonalRight();
+				return 0;
+			}
+		}
+	}
+	return -1;
+}
