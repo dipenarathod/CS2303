@@ -376,3 +376,15 @@ bool Board::canMove(int row, int col)
 
 	return moving;
 }
+
+Checker* Board::findChecker(int row,int col,Checker** red,Checker** black){
+	for(int i=0;i<12;i++){
+		if(row==red[i]->getRow() && col==red[i]->getCol()){
+			return red[i];
+		}
+		if(row==black[i]->getRow() && col==black[i]->getCol()){
+			return black[i];
+		}
+	}
+	return NULL;
+}
