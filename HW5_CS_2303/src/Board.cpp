@@ -283,72 +283,68 @@ bool Board::isWin(){
 	}
 }
 
-bool Board::isValid(int rowIn, int colIn,char move){
+bool Board::isValid(pieceMove move){
 	bool ok = false;
 	int row = 0, col = 0;
-	if(this->getEdge(rowIn, colIn) == 'b' || this->getEdge(rowIn, colIn) == 'B'){
-		if(move == 'i'){
-			row = rowIn - 1;
-			col = colIn - 1;
-			if((row >= 0 && row <= 8) && (col >= 0 && col <= 8)){
-				if(this->getEdge(row, col) == '-')
-					ok = true;
-
+	if((move.piece)->getPlayerColor() == 'b'){
+		if(move.move == 'i'){
+				row = move.row -1;
+				col = move.col - 1;
+				if((row >= 0 && row <= 8) && (col >= 0 && col <= 8))
+					if(this->getEdge(row, col) == '-')
+						ok = true;
 			}
-
-
-		}
-		if(move == 'o'){
-			row =rowIn - 1;
-			col = colIn + 1;
-			if((row >= 0 && row <= 8) && (col >= 0 && col <=8))
-				if(this->getEdge(row, col) == '-')
-					ok = true;
-		}
-		if(move == 'j'){
-			row = rowIn + 1;
-			col = colIn - 1;
-			if((row >= 0 && row <= 8) && (col >= 0 && col <= 8))
-				if(this->getEdge(row, col) == '-')
-					ok = true;
-		}
-		if(move == 'k'){
-			row = rowIn + 1;
-			col = colIn + 1;
-			if((row >= 0 && row <= 8) && (col >= 0 && col <= 8))
-				if(this->getEdge(row, col) == '-')
-					ok = true;
-		}
+			if(move.move == 'o'){
+				row =move.row - 1;
+				col = move.col + 1;
+				if((row >= 0 && row <= 8) && (col >= 0 && col <=8))
+					if(this->getEdge(row, col) == '-')
+						ok = true;
+			}
+			if(move.move == 'k'){
+				row = move.row + 1;
+				col = move.col -1;
+				if((row >= 0 && row <= 8) && (col >= 0 && col <= 8))
+					if(this->getEdge(row, col) == '-')
+						ok = true;
+			}
+			if(move.move == 'k'){
+				row = move.row + 1;
+				col = move.col + 1;
+				if((row >= 0 && row <= 8) && (col >= 0 && col <= 8))
+					if(this->getEdge(row, col) == '-')
+						ok = true;
+			}
 	}
-	else if(this->getEdge(rowIn, colIn) == 'r' || this->getEdge(rowIn, colIn) =='R'){
-		if(move == 'i'){
-			row = rowIn + 1;
-			col = colIn - 1;
-			if((row >= 0 && row <= 8) && (col >= 0 && col <= 8))
-				if(this->getEdge(row, col) == '-')
-					ok = true;
-		}
-		if(move == 'o'){
-			row =rowIn + 1;
-			col = colIn + 1;
-			if((row >= 0 && row <= 8) && (col >= 0 && col <=8))
-				if(this->getEdge(row, col) == '-')
-					ok = true;
-		}
-		if(move == 'j'){
-			row = rowIn - 1;
-			col = colIn -1;
-			if((row >= 0 && row <= 8) && (col >= 0 && col <= 8))
-				if(this->getEdge(row, col) == '-')
-					ok = true;
-		}
-		if(move == 'k'){
-			row = rowIn - 1;
-			col = colIn + 1;
-			if((row >= 0 && row <= 8) && (col >= 0 && col <= 8))
-				if(this->getEdge(row, col) == '-')
-					ok = true;
-		}
+	else{
+		if(move.move == 'i'){
+				row = move.row + 1;
+				col = move.col - 1;
+				if((row >= 0 && row <= 8) && (col >= 0 && col <= 8))
+					if(this->getEdge(row, col) == '-')
+						ok = true;
+			}
+			if(move.move == 'o'){
+				row = move.row + 1;
+				col = move.col + 1;
+				if((row >= 0 && row <= 8) && (col >= 0 && col <=8))
+					if(this->getEdge(row, col) == '-')
+						ok = true;
+			}
+			if(move.move == 'k'){
+				row = move.row - 1;
+				col = move.col -1;
+				if((row >= 0 && row <= 8) && (col >= 0 && col <= 8))
+					if(this->getEdge(row, col) == '-')
+						ok = true;
+			}
+			if(move.move == 'k'){
+				row = move.row - 1;
+				col = move.col + 1;
+				if((row >= 0 && row <= 8) && (col >= 0 && col <= 8))
+					if(this->getEdge(row, col) == '-')
+						ok = true;
+			}
 	}
 
 
