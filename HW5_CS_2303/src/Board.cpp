@@ -190,37 +190,37 @@ bool Board::isWin(){
 bool Board::isValid(pieceMove move) {
 	bool ok = false;
 	int row = 0, col = 0;
-	if ((move.piece)->getPlayerColor() == 'b') {
+	if ((move.piece)->getPlayerColor() == 'b' || (move.piece)->getPlayerColor() == 'B' ) {
 		if (move.move == 'i') {
 			row = move.row - 1;
 			col = move.col - 1;
-			if ((row >= 0 && row <= 8) && (col >= 0 && col <= 8))
+			if ((row >= 0 && row <= 7) && (col >= 0 && col <=7))
 				if (this->getEdge(row, col) == '-')
 					ok = true;
 		}
 		if (move.move == 'o') {
 			row = move.row - 1;
 			col = move.col + 1;
-			if ((row >= 0 && row <= 8) && (col >= 0 && col <= 8))
+			if ((row >= 0 && row <= 7) && (col >= 0 && col <= 7))
 				if (this->getEdge(row, col) == '-')
 					ok = true;
 		}
 		if (move.move == 'j') {
 			row = move.row + 1;
 			col = move.col - 1;
-			if ((row >= 0 && row <= 8) && (col >= 0 && col <= 8))
+			if ((row >= 0 && row <= 7) && (col >= 0 && col <= 7))
 				if (this->getEdge(row, col) == '-')
 					ok = true;
 		}
 		if (move.move == 'k') {
 			row = move.row + 1;
 			col = move.col + 1;
-			if ((row >= 0 && row <= 8) && (col >= 0 && col <= 8))
+			if ((row >= 0 && row <= 7) && (col >= 0 && col <= 7))
 				if (this->getEdge(row, col) == '-')
 					ok = true;
 		}
 	}
-	else {
+	else if((move.piece)->getPlayerColor() == 'r' || (move.piece)->getPlayerColor() == 'R' ) {
 		if (move.move == 'i') {
 			row = move.row + 1;
 			col = move.col - 1;
@@ -260,7 +260,7 @@ bool Board::canMove(int row, int col)
 {
 	bool moving = true;
 
-	if((0 <= row && row <= 8) && (0 <= col && col <= 8))
+	if((0 <= row && row <= 7) && (0 <= col && col <= 7))
 	{
 		pieceMove i;
 		i.row = row;
