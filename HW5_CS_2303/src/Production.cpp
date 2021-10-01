@@ -22,7 +22,7 @@ bool Production::prod(int argc, char* argv[])
 {
 	printf("Starting Production\n");
 	bool answer;
-	Board* theBoard = new Board();
+
 	Checker** redCheckers=new Checker*[12];
 	for(int i=0;i<12;i++){
 		redCheckers[i]=(Checker*)0;
@@ -31,6 +31,8 @@ bool Production::prod(int argc, char* argv[])
 	for(int i=0;i<12;i++){
 		blackCheckers[i]=(Checker*)0;
 	}
+
+
 	if(argc <=1) //no interesting information
 	{
 		puts("Didn't find any arguments.");
@@ -62,38 +64,49 @@ bool Production::prod(int argc, char* argv[])
 		boards<<"Here goes nothing \n";
 		boards.close();
 		puts("Before read file"); fflush(stdout);
+		Board* theBoard = new Board();
 		answer = readFile("originalBoard.txt", theBoard,redCheckers,blackCheckers); //read the file
 		puts("Back from read file"); fflush(stdout);
+
+		theBoard->red = redCheckers;
+		theBoard->black = blackCheckers;
 		while(!theBoard->isWin()){
+
+			theBoard->computer(redCheckers);
+
 			theBoard->displayBoard();
+
+
 
 			printf("%d\n",redCheckers[0]->getCol());fflush(stdout);
 			pieceMove move=getPlayerMove(redCheckers,blackCheckers);
 
 
-			bool valid = theBoard->isValid(move);
 
+			bool valid = theBoard->isValid(move);
+			std::cout << "Is valid: " << valid<< std::endl;
 
 			if(valid){
 				if(move.move == 'i'){
 					move.piece->moveDiagonalLeft();
 				}
-				if(move.move == 'o'){
+				else if(move.move == 'o'){
 					move.piece->moveDiagonalRight();
 				}
-				if(move.move == 'j'){
+				else if(move.move == 'j'){
 					move.piece->moveBackDiagonalLeft();
 				}
-				if(move.move == 'k'){
+				else if(move.move == 'k'){
 					move.piece->moveBackDiagonalRight();
 				}
 			}
 			else if(theBoard->canJump(move)){}
 
-			theBoard->mover();
+
+
 			theBoard->printToFile("gameState.txt",redCheckers,blackCheckers);
 
-			std::cout << "Is valid: " << valid<< std::endl;
+
 		}
 
 

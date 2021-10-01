@@ -120,6 +120,7 @@ char* Board::getEdgesP(){
 bool Board::canJump(pieceMove inPiece){
 	int row = 0, col = 0;
 	bool ok = false;
+
 	if(inPiece.move == 'i'){
 		row = inPiece.row - 2;
 		col = inPiece.col - 2;
@@ -145,16 +146,16 @@ bool Board::canJump(pieceMove inPiece){
 		row= inPiece.row+2;
 		col= inPiece.col+2;
 		if((row >=0 && row <= 7) && (col >= 0 && col <= 7) && (this->getEdge(row, col) == '-')){
-				ok = true;		
-			}
+			ok = true;
+		}
 	}
 	if (inPiece.move=='k'){
-			row= inPiece.row+2;
-			col= inPiece.col-2;
-			if((row >=0 && row <= 7) && (col >= 0 && col <= 7) && (this->getEdge(row, col) == '-')){
-					ok = true;		
-				}
+		row= inPiece.row+2;
+		col= inPiece.col-2;
+		if((row >=0 && row <= 7) && (col >= 0 && col <= 7) && (this->getEdge(row, col) == '-')){
+			ok = true;
 		}
+	}
 	return ok;
 }
 /*bool Board::moveb()
@@ -288,6 +289,7 @@ bool Board::isValid(pieceMove move){
 	int row = 0, col = 0;
 	if((move.piece)->getPlayerColor() == 'b'){
 		if(move.move == 'i'){
+<<<<<<< Updated upstream
 				row = move.row -1;
 				col = move.col - 1;
 				if((row >= 0 && row <= 8) && (col >= 0 && col <= 8))
@@ -345,6 +347,65 @@ bool Board::isValid(pieceMove move){
 					if(this->getEdge(row, col) == '-')
 						ok = true;
 			}
+=======
+			row = move.row -1;
+			col = move.col - 1;
+			if((row >= 0 && row <= 8) && (col >= 0 && col <= 8))
+				if(this->getEdge(row, col) == '-')
+					ok = true;
+		}
+		if(move.move == 'o'){
+			row =move.row - 1;
+			col = move.col + 1;
+			if((row >= 0 && row <= 8) && (col >= 0 && col <=8))
+				if(this->getEdge(row, col) == '-')
+					ok = true;
+		}
+		if(move.move == 'j'){
+			row = move.row + 1;
+			col = move.col -1;
+			if((row >= 0 && row <= 8) && (col >= 0 && col <= 8))
+				if(this->getEdge(row, col) == '-')
+					ok = true;
+		}
+		if(move.move == 'k'){
+			row = move.row + 1;
+			col = move.col + 1;
+			if((row >= 0 && row <= 8) && (col >= 0 && col <= 8))
+				if(this->getEdge(row, col) == '-')
+					ok = true;
+		}
+	}
+	else{
+		if(move.move == 'i'){
+			row = move.row + 1;
+			col = move.col - 1;
+			if((row >= 0 && row <= 8) && (col >= 0 && col <= 8))
+				if(this->getEdge(row, col) == '-')
+					ok = true;
+		}
+		if(move.move == 'o'){
+			row = move.row + 1;
+			col = move.col + 1;
+			if((row >= 0 && row <= 8) && (col >= 0 && col <=8))
+				if(this->getEdge(row, col) == '-')
+					ok = true;
+		}
+		if(move.move == 'j'){
+			row = move.row - 1;
+			col = move.col -1;
+			if((row >= 0 && row <= 8) && (col >= 0 && col <= 8))
+				if(this->getEdge(row, col) == '-')
+					ok = true;
+		}
+		if(move.move == 'k'){
+			row = move.row - 1;
+			col = move.col + 1;
+			if((row >= 0 && row <= 8) && (col >= 0 && col <= 8))
+				if(this->getEdge(row, col) == '-')
+					ok = true;
+		}
+>>>>>>> Stashed changes
 	}
 
 
@@ -401,20 +462,41 @@ Checker* Board::findChecker(int row,int col,Checker** red,Checker** black){
 
 int Board::computer(Checker** red)
 {
+	std::cout << "EEEE";
 
-	for(int i = 0; i < 13; i++)
+	pieceMove iMove;
+	iMove.row = red[0]->getRow();
+	iMove.col = red[0]->getRow();
+	std::cout << "ee\n";
+	iMove.move = 'i';
+
+	if(this->isValid(iMove)){
+		red[0]->moveDiagonalLeft();
+		return 0;
+	}
+	/*for(int i = 0; i < 1; i++)
 	{
+		std::cout << "eee\n";
+
 		pieceMove iMove;
 		iMove.row = red[i]->getRow();
 		iMove.col = red[i]->getCol();
 		iMove.move = 'i';
+		std::cout<<"|1|\n";
 
 		pieceMove oMove;
 		oMove.row = red[i]->getRow();
 		oMove.col = red[i]->getCol();
 		oMove.move = 'o';
+		std::cout<<"|2|\n";
 
-		if(red[i]->isKing)
+
+		if(this->isValid(iMove))
+		{
+			red[i]->moveDiagonalRight();
+			return 0;
+		}*/
+		/*if(red[i]->isKing)
 		{
 			pieceMove kMove;
 			kMove.row = red[i]->getRow();
@@ -425,6 +507,7 @@ int Board::computer(Checker** red)
 			jMove.row = red[i]->getRow();
 			jMove.col = red[i]->getCol();
 			jMove.move = 'j';
+
 
 			if(this->canJump(iMove))
 			{
@@ -465,25 +548,8 @@ int Board::computer(Checker** red)
 		}
 		else
 		{
-			if(this->canJump(iMove))
-			{
-				return 0;
-			}
-			if(this->canJump(oMove))
-			{
-				return 0;
-			}
-			if(this->isValid(iMove))
-			{
-				red[i]->moveDiagonalLeft();
-				return 0;
-			}
-			if(this->isValid(oMove))
-			{
-				red[i]->moveDiagonalRight();
-				return 0;
-			}
+
 		}
-	}
-	return -1;
+	}*/
+	return 0;
 }
