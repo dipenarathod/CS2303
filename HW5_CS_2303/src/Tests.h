@@ -21,7 +21,7 @@ public:
 private:
 	bool testReadFile();
 	bool testEnqueue();
-	bool testGotAdjacencyMatrix();
+	bool testGotBoard();
 	bool testMakeLList();
 	//pedagogical bool testRemoveFromList();
 	bool testPrintHistory();
