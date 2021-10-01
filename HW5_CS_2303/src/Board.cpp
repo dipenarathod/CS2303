@@ -301,7 +301,7 @@ bool Board::isValid(pieceMove move){
 					if(this->getEdge(row, col) == '-')
 						ok = true;
 			}
-			if(move.move == 'k'){
+			if(move.move == 'j'){
 				row = move.row + 1;
 				col = move.col -1;
 				if((row >= 0 && row <= 8) && (col >= 0 && col <= 8))
