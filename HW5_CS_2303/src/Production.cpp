@@ -70,18 +70,13 @@ bool Production::prod(int argc, char* argv[])
 
 		theBoard->red = redCheckers;
 		theBoard->black = blackCheckers;
-		while(!theBoard->isWin()){
-
-			theBoard->computer(redCheckers);
+		while(!theBoard->isWin() && this->amGoingFirst){
 
 			theBoard->displayBoard();
 
 
-
 			printf("%d\n",redCheckers[0]->getCol());fflush(stdout);
 			pieceMove move=getPlayerMove(redCheckers,blackCheckers);
-
-
 
 			bool valid = theBoard->isValid(move);
 			std::cout << "Is valid: " << valid<< std::endl;
@@ -101,18 +96,14 @@ bool Production::prod(int argc, char* argv[])
 				}
 			}
 			else if(theBoard->canJump(move)){}
+			theBoard->computer(redCheckers);
+			theBoard->printToFile("gameState.txt", redCheckers, blackCheckers);
 
-
-
-			theBoard->printToFile("gameState.txt",redCheckers,blackCheckers);
 
 
 		}
-
-
-
-
 	}
+
 	return answer;
 }
 
