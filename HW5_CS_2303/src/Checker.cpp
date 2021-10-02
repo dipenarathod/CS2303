@@ -84,6 +84,8 @@ int Checker::getCol(){
 char Checker::getPlayerColor(){
 	return this->playerColor;
 }
+
+
 void Checker::makeKing(){
 	if(((this->row)==7)&&((this->playerColor)=='r')){
 		setPlayerColor('R');
