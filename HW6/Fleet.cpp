@@ -160,7 +160,7 @@ Boolean Fleet::checkSunkShip (short sunkShip[][NUM_OF_SHIPS], short player, char
 Boolean Fleet::isWinner (Stats players[], int player) {
 	Boolean isWin = FALSE;
 
-	if (players[player].numHits == 17)
+	if (players[player].numHits >= 17)
 		isWin = TRUE;
 
 	return isWin;
