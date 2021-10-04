@@ -38,7 +38,8 @@ public:
 	bool isValid(pieceMove);
 	bool canMove(int, int);
 	int computer(Checker**);
-	Checker* findChecker(int, int,Checker**,Checker**);
+	bool mustJump();
+	Checker* findChecker(int, int);
 	Checker** red;
 	Checker** black;
 

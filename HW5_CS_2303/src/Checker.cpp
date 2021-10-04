@@ -20,10 +20,12 @@ void Checker::moveDiagonalLeft(){
 	if(this->getPlayerColor()=='b' || this->getPlayerColor()=='B'){
 		this->row-=1;
 		this->col-=1;
+		this->checkIfKing();
 	}
 	else if(this->getPlayerColor()=='r' || this->getPlayerColor()=='R'){
 		this->row+=1;
 		this->col+=1;
+		this->checkIfKing();
 	}
 }
 
@@ -31,10 +33,25 @@ void Checker::moveDiagonalRight(){
 	if(this->getPlayerColor()=='b' || this->getPlayerColor()=='B'){
 		this->row-=1;
 		this->col+=1;
+		this->checkIfKing();
 	}
 	if(this->getPlayerColor()=='r' || this->getPlayerColor()=='R'){
 		this->row+=1;
 		this->col-=1;
+		this->checkIfKing();
+	}
+}
+
+void Checker::checkIfKing(){
+	if(this->getPlayerColor() == 'b'){
+		if(this->row == 0){
+			this->makeKing();
+		}
+	}
+	if(this->getPlayerColor() == 'r'){
+		if(this->row == 7){
+			this->makeKing();
+		}
 	}
 }
 

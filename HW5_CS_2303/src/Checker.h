@@ -24,7 +24,9 @@ public:
 	char getPlayerColor();
 	void makeKing();
 	bool checkVaild(char);
+	void checkIfKing();
 	bool isKing = false;
+
 private:
 	int row;
 	int col;
