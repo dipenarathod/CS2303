@@ -10,6 +10,8 @@
 #include "Production.h"
 #include <stdio.h>
 #include "Checker.h"
+#include <iostream>
+#include "Board.h"
 
 
 class Tests {
@@ -17,21 +19,23 @@ public:
 	Tests();
 	virtual ~Tests();
 	bool tests();
-
-private:
 	bool testReadFile();
 	bool testEnqueue();
-	bool testGotAdjacencyMatrix();
+	bool testGotBoard();
 	bool testMakeLList();
 	//pedagogical bool testRemoveFromList();
 	bool testPrintHistory();
 	bool testFileOutput();
 
-	//My test cases
+	//Test cases for methods in Board
 	bool testMoveDiagonalLeft();
 	bool testMoveDiagonalRight();
 	bool testMoveBackDiagonalLeft();
 	bool testMoveBackDiagonalRight();
+
+	//Test cases for methods in Production
+	bool testGetPlayerMove();
+
 };
 
 #endif /* TESTS_H_ */
