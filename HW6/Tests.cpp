@@ -37,9 +37,11 @@ bool Tests::testWelcomeScreen(){
 	Production* prod=new Production();
 	prod->welcomeScreen();
 	if(prod->getYesNo("Correct welcome screen?")){
+		printf("welcomeScreen passed\n");fflush(stdout);
 		return true;
 	}
 	else{
+		printf("welcomeScreen failed\n");fflush(stdout);
 		return false;
 	}
 }
@@ -104,7 +106,7 @@ bool Tests::testManuallyPlaceShipsOnGameBoard(){
 		return true;
 	}
 	else{
-		printf("testManuallyPlaceShipsOnGameBoard passes\n");fflush(stdout);
+		printf("testManuallyPlaceShipsOnGameBoard fails\n");fflush(stdout);
 		return false;
 	}
 }
@@ -286,3 +288,4 @@ bool Tests::testCheckShot(){
 		return false;
 	}
 }
+
