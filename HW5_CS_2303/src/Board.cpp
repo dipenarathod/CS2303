@@ -281,28 +281,28 @@ bool Board::isValid(pieceMove move) {
 			row = move.row - 1;
 			col = move.col - 1;
 			if ((row >= 0 && row <= 8) && (col >= 0 && col <= 8))
-				if (this->getEdge(row, col) == '-')
+				if (this->getEdge(row, col) == '-' && (this->findChecker(row,col) == nullptr))
 					ok = true;
 		}
 		if (move.move == 'o') {
 			row = move.row - 1;
 			col = move.col + 1;
 			if ((row >= 0 && row <= 8) && (col >= 0 && col <= 8))
-				if (this->getEdge(row, col) == '-')
+				if (this->getEdge(row, col) == '-' && (this->findChecker(row,col) == nullptr))
 					ok = true;
 		}
 		if (move.move == 'j') {
 			row = move.row + 1;
 			col = move.col - 1;
 			if ((row >= 0 && row <= 8) && (col >= 0 && col <= 8))
-				if (this->getEdge(row, col) == '-')
+				if (this->getEdge(row, col) == '-' && (this->findChecker(row,col) == nullptr))
 					ok = true;
 		}
 		if (move.move == 'k') {
 			row = move.row + 1;
 			col = move.col + 1;
 			if ((row >= 0 && row <= 8) && (col >= 0 && col <= 8))
-				if (this->getEdge(row, col) == '-')
+				if (this->getEdge(row, col) == '-' && (this->findChecker(row,col) == nullptr))
 					ok = true;
 		}
 	}
@@ -423,8 +423,6 @@ Checker* Board::findChecker(int row, int col) {
 }
 int Board::computer(Checker** red)
 {
-
-
 	bool mustJump = this->mustJump();
 
 	for (int i = 0; i < 12; i++)
