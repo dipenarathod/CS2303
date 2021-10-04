@@ -126,7 +126,7 @@ bool Board::canJump(pieceMove inPiece) {
 			if (this->getEdge((inPiece.row - 1), (inPiece.col - 1)) == 'r' || this->getEdge((inPiece.row - 1), (inPiece.col - 1)) == 'R') {
 				row = inPiece.row - 2;
 				col = inPiece.col - 2;
-				if ((row >= 0 && row <= 7) && (col >= 0 && col <= 7) && (this->getEdge(row, col) == '-')) {
+				if ((row >= 0 && row <= 7) && (col >= 0 && col <= 7) && (this->getEdge(row, col) == '-') && (this->findChecker(row,col) == NULL)) {
 					ok = true;
 					Checker* deadPiece = this->findChecker((inPiece.row - 1), (inPiece.col - 1));
 					deadPiece->setColumn(-1);
@@ -141,7 +141,7 @@ bool Board::canJump(pieceMove inPiece) {
 			if (this->getEdge((inPiece.row - 1), (inPiece.col + 1)) == 'r' || this->getEdge((inPiece.row - 1), (inPiece.col + 1)) == 'R') {
 				row = inPiece.row - 2;
 				col = inPiece.col + 2;
-				if ((row >= 0 && row <= 7) && (col >= 0 && col <= 7) && (this->getEdge(row, col) == '-')) {
+				if ((row >= 0 && row <= 7) && (col >= 0 && col <= 7) && (this->getEdge(row, col) == '-') && (this->findChecker(row,col) == NULL)) {
 					ok = true;
 					Checker* deadPiece = this->findChecker((inPiece.row - 1), (inPiece.col + 1));
 					deadPiece->setColumn(-1);
@@ -156,7 +156,7 @@ bool Board::canJump(pieceMove inPiece) {
 			if (this->getEdge((inPiece.row + 1), (inPiece.col + 1)) == 'r' || this->getEdge((inPiece.row + 1), (inPiece.col + 1)) == 'R') {
 				row = inPiece.row + 2;
 				col = inPiece.col + 2;
-				if ((row >= 0 && row <= 7) && (col >= 0 && col <= 7) && (this->getEdge(row, col) == '-')) {
+				if ((row >= 0 && row <= 7) && (col >= 0 && col <= 7) && (this->getEdge(row, col) == '-') && (this->findChecker(row,col) == NULL)) {
 					ok = true;
 					Checker* deadPiece = this->findChecker((inPiece.row + 1), (inPiece.col + 1));
 					deadPiece->setColumn(-1);
@@ -168,7 +168,7 @@ bool Board::canJump(pieceMove inPiece) {
 			if (this->getEdge((inPiece.row + 1), (inPiece.col - 1)) == 'r' || this->getEdge((inPiece.row + 1), (inPiece.col - 1)) == 'R') {
 				row = inPiece.row + 2;
 				col = inPiece.col - 2;
-				if ((row >= 0 && row <= 7) && (col >= 0 && col <= 7) && (this->getEdge(row, col) == '-')) {
+				if ((row >= 0 && row <= 7) && (col >= 0 && col <= 7) && (this->getEdge(row, col) == '-') && (this->findChecker(row,col) == NULL)) {
 					ok = true;
 					Checker* deadPiece = this->findChecker((inPiece.row + 1), (inPiece.col - 1));
 					deadPiece->setColumn(-1);
@@ -182,7 +182,7 @@ bool Board::canJump(pieceMove inPiece) {
 			if (this->getEdge((inPiece.row + 1), (inPiece.col + 1)) == 'b' || this->getEdge((inPiece.row + 1), (inPiece.col + 1)) == 'B') {
 				row = inPiece.row + 2;
 				col = inPiece.col + 2;
-				if ((row >= 0 && row <= 7) && (col >= 0 && col <= 7) && (this->getEdge(row, col) == '-')) {
+				if ((row >= 0 && row <= 7) && (col >= 0 && col <= 7) && (this->getEdge(row, col) == '-') && (this->findChecker(row,col) == NULL)) {
 					Checker* jumpPiece = this->findChecker((inPiece.row + 1), (inPiece.col + 1));
 					jumpPiece->setColumn(-1);
 					jumpPiece->setRow(-1);
@@ -198,7 +198,7 @@ bool Board::canJump(pieceMove inPiece) {
 			if (this->getEdge((inPiece.row + 1), (inPiece.col - 1)) == 'b' || this->getEdge((inPiece.row + 1), (inPiece.col - 1)) == 'B') {
 				row = inPiece.row + 2;
 				col = inPiece.col - 2;
-				if ((row >= 0 && row <= 7) && (col >= 0 && col <= 7) && (this->getEdge(row, col) == '-')) {
+				if ((row >= 0 && row <= 7) && (col >= 0 && col <= 7) && (this->getEdge(row, col) == '-') && (this->findChecker(row,col) == NULL)) {
 					ok = true;
 					Checker* jumpPiece = this->findChecker((inPiece.row + 1), (inPiece.col - 1));
 					jumpPiece ->setColumn(-1);
@@ -214,7 +214,7 @@ bool Board::canJump(pieceMove inPiece) {
 			if (this->getEdge((inPiece.row - 1), (inPiece.col + 1)) == 'b' || this->getEdge((inPiece.row - 1), (inPiece.col + 1)) == 'B') {
 				row = inPiece.row - 2;
 				col = inPiece.col + 2;
-				if ((row >= 0 && row <= 7) && (col >= 0 && col <= 7) && (this->getEdge(row, col) == '-')) {
+				if ((row >= 0 && row <= 7) && (col >= 0 && col <= 7) && (this->getEdge(row, col) == '-') && (this->findChecker(row,col) == NULL)) {
 					Checker* jumpPiece = this->findChecker((inPiece.row - 1), (inPiece.col + 1));
 					jumpPiece->setColumn(-1);
 					jumpPiece->setRow(-1);
@@ -228,7 +228,7 @@ bool Board::canJump(pieceMove inPiece) {
 			if (this->getEdge((inPiece.row + 1), (inPiece.col - 1)) == 'b' || this->getEdge((inPiece.row + 1), (inPiece.col - 1)) == 'B') {
 				row = inPiece.row + 2;
 				col = inPiece.col - 2;
-				if ((row >= 0 && row <= 7) && (col >= 0 && col <= 7) && (this->getEdge(row, col) == '-')) {
+				if ((row >= 0 && row <= 7) && (col >= 0 && col <= 7) && (this->getEdge(row, col) == '-') && (this->findChecker(row,col) == NULL)) {
 					Checker* jumpPiece = this->findChecker((inPiece.row + 1), (inPiece.col - 1));
 					jumpPiece->setColumn(-1);
 					jumpPiece->setRow(-1);
@@ -281,28 +281,28 @@ bool Board::isValid(pieceMove move) {
 			row = move.row - 1;
 			col = move.col - 1;
 			if ((row >= 0 && row <= 8) && (col >= 0 && col <= 8))
-				if (this->getEdge(row, col) == '-' && (this->findChecker(row,col) == nullptr))
+				if (this->getEdge(row, col) == '-' && (this->findChecker(row,col) == NULL))
 					ok = true;
 		}
 		if (move.move == 'o') {
 			row = move.row - 1;
 			col = move.col + 1;
 			if ((row >= 0 && row <= 8) && (col >= 0 && col <= 8))
-				if (this->getEdge(row, col) == '-' && (this->findChecker(row,col) == nullptr))
+				if (this->getEdge(row, col) == '-' && (this->findChecker(row,col) == NULL))
 					ok = true;
 		}
 		if (move.move == 'j') {
 			row = move.row + 1;
 			col = move.col - 1;
 			if ((row >= 0 && row <= 8) && (col >= 0 && col <= 8))
-				if (this->getEdge(row, col) == '-' && (this->findChecker(row,col) == nullptr))
+				if (this->getEdge(row, col) == '-' && (this->findChecker(row,col) == NULL))
 					ok = true;
 		}
 		if (move.move == 'k') {
 			row = move.row + 1;
 			col = move.col + 1;
 			if ((row >= 0 && row <= 8) && (col >= 0 && col <= 8))
-				if (this->getEdge(row, col) == '-' && (this->findChecker(row,col) == nullptr))
+				if (this->getEdge(row, col) == '-' && (this->findChecker(row,col) == NULL))
 					ok = true;
 		}
 	}
@@ -311,28 +311,28 @@ bool Board::isValid(pieceMove move) {
 			row = move.row + 1;
 			col = move.col - 1;
 			if ((row >= 0 && row <= 7) && (col >= 0 && col <= 7))
-				if (this->getEdge(row, col) == '-')
+				if (this->getEdge(row, col) == '-'&& (this->findChecker(row,col) == NULL))
 					ok = true;
 		}
 		if (move.move == 'o') {
 			row = move.row + 1;
 			col = move.col + 1;
 			if ((row >= 0 && row <= 7) && (col >= 0 && col <= 7))
-				if (this->getEdge(row, col) == '-')
+				if (this->getEdge(row, col) == '-'&& (this->findChecker(row,col) == NULL))
 					ok = true;
 		}
 		if (move.move == 'j') {
 			row = move.row - 1;
 			col = move.col - 1;
 			if ((row >= 0 && row <= 7) && (col >= 0 && col <= 7))
-				if (this->getEdge(row, col) == '-')
+				if (this->getEdge(row, col) == '-'&& (this->findChecker(row,col) == NULL))
 					ok = true;
 		}
 		if (move.move == 'k') {
 			row = move.row - 1;
 			col = move.col + 1;
 			if ((row >= 0 && row <= 7) && (col >= 0 && col <= 7))
-				if (this->getEdge(row, col) == '-')
+				if (this->getEdge(row, col) == '-'&& (this->findChecker(row,col) == NULL))
 					ok = true;
 		}
 	}
