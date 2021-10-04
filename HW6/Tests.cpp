@@ -229,17 +229,13 @@ bool Tests::testIsWinner(){
 	bool ok4=false;
 	Fleet* ship=new Fleet();
 	if(ship->isWinner(players1, 0) && !(ship->isWinner(players1,1)))
-		ok1=true;\
-	else if(!(ship->isWinner(players2,0)) && ship->isWinner(players2, 1))
+		ok1=true;
+	if(!(ship->isWinner(players2,0)) && ship->isWinner(players2, 1))
 		ok2=true;
-	else if(ship->isWinner(players3,0) && ship->isWinner(players3, 1))
+	if(ship->isWinner(players3,0) && ship->isWinner(players3, 1))
 		ok3=true;
-	else if(!(ship->isWinner(players4,0)) && !(ship->isWinner(players4, 1)))
+	if(!(ship->isWinner(players4,0)) && !(ship->isWinner(players4, 1)))
 		ok4=true;
-	std::cout<<ok1<<std::endl;
-	std::cout<<ok2<<std::endl;
-	std::cout<<ok3<<std::endl;
-	std::cout<<ok4<<std::endl;
 	if(ok1&&ok2&&ok3&&ok4){
 		printf("testIsWinner Passed\n");fflush(stdout);
 		return true;
