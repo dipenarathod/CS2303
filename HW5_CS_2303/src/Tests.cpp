@@ -23,11 +23,11 @@ bool Tests::tests()
 {
 	bool answer = true;
 
-	//bool ok1 = testReadFile();
+	bool ok1 = testReadFile();
 	bool ok2 = testFileOutput();
 	bool ok3 = testMakeLList();
 	bool ok4 = testEnqueue();
-	//bool ok5 = testGotAdjacencyMatrix();
+	bool ok5 = testGotBoard();
 	//pedagogical bool ok5 = testRemoveFromList();
 	bool ok6 = testPrintHistory();
 
@@ -35,11 +35,15 @@ bool Tests::tests()
 	bool ok8= testMoveDiagonalRight();
 	bool ok9= testMoveBackDiagonalLeft();
 	bool ok10= testMoveBackDiagonalRight();
-	answer = /*ok1 &&*/ ok3 && ok4 && ok6 && ok7 && ok8 && ok10;
+
+	bool ok11=this->testGetPlayerMove();
+
+	//answer = ok1 &&ok3 && ok4 && ok6 && ok7 && ok8 && ok10 && ok11;
+	answer=ok11;
 	return answer;
 }
 
-/*bool Tests::testReadFile()
+bool Tests::testReadFile()
 {
 	puts("starting testReadFile"); fflush(stdout);
 	bool ok = true;
@@ -69,7 +73,7 @@ bool Tests::tests()
 	}
 
 	return ok;
-}*/
+}
 bool Tests::testEnqueue()
 {
 	bool ok = true;
@@ -99,24 +103,28 @@ bool Tests::testEnqueue()
 	return ok;
 }
 
-bool Tests::testGotAdjacencyMatrix()
+bool Tests::testGotBoard()
 {
 	bool ans = true;
 
-	std::cout << "Running testGotAdjacencyMatrix" << std::endl;
+	std::cout << "Running testGotBoard" << std::endl;
 
-	Board* theBoard=(Board*)malloc(sizeof(Board));
-	int howManySpots=12;
-	theBoard->setEdgesP((char*) malloc(howManySpots * howManySpots *sizeof(int)));
+	Board* theBoard=new Board();
+	theBoard->setEdgesP((char*) malloc(8 * 8 *sizeof(char)));
 	theBoard->init();
-	for(int i=1;i<3;i++){
-		theBoard->setEdgesP(theBoard->getEdgesP()+i);
-		if(*(theBoard->getEdgesP())!=0){
-			ans=false;
-			puts("testGotAdjacencyMatrix fails");
+	for(int i=0;i<8;i++){
+		for(int j=0;j<8;j++){
+			if(theBoard->getEdge(i, j)!='-'){
+				ans=false;
+			}
 		}
 	}
-	puts("testGotAdjacencyMatrix passes");
+	if(ans){
+		puts("testGotBoard passes");fflush(stdout);
+	}
+	else{
+		puts("testGotBoard fails");fflush(stdout);
+	}
 	free(theBoard);
 
 	return ans;
@@ -341,6 +349,50 @@ bool Tests::testMoveBackDiagonalRight(){
 	else{
 		printf("testMoveBackDiagonalRight fails\n");
 		fflush(stdout);
+		return false;
+	}
+}
+
+bool Tests::testGetPlayerMove(){
+	printf("In testGetPlayerMove");fflush(stdout);
+	Production* prod=new Production();
+	Checker** red=new Checker*[12];
+	for(int i=0;i<3;i++){
+		red[i]=new Checker();
+	}
+	Checker** black=new Checker*[12];
+	for(int i=0;i<3;i++){
+		black[i]=new Checker();
+	}
+	red[0]->setRow(0);
+	red[0]->setColumn(0);
+	red[0]->setPlayerColor('r');
+	red[1]->setRow(0);
+	red[1]->setColumn(1);
+	red[1]->setPlayerColor('r');
+	red[2]->setRow(0);
+	red[2]->setColumn(2);
+	red[2]->setPlayerColor('r');
+	black[0]->setRow(1);
+	black[0]->setColumn(0);
+	black[0]->setPlayerColor('b');
+	black[1]->setRow(1);
+	black[1]->setColumn(1);
+	black[1]->setPlayerColor('b');
+	black[2]->setRow(1);
+	black[2]->setColumn(2);
+	black[2]->setPlayerColor('b');
+	printf("Created checkers\n");fflush(stdout);
+	pieceMove move=prod->getPlayerMove(red,black);
+	printf("%d\n",move.row);
+	printf("%d\n",move.col);
+	printf("%c\n",move.move);
+	if(prod->getYesNo("Were these the values you entered?")){
+		printf("getPlayerMove passes\n");fflush(stdout);
+		return true;
+	}
+	else{
+		printf("getPlayerMove fails\n");fflush(stdout);
 		return false;
 	}
 }
