@@ -357,31 +357,19 @@ bool Tests::testGetPlayerMove(){
 	printf("In testGetPlayerMove");fflush(stdout);
 	Production* prod=new Production();
 	Checker** red=new Checker*[12];
-	for(int i=0;i<3;i++){
+	for(int i=0;i<12;i++){
 		red[i]=new Checker();
+		red[i]->setRow(i*10);
+		red[i]->setColumn(i*10);
+		red[i]->setPlayerColor('r');
 	}
 	Checker** black=new Checker*[12];
-	for(int i=0;i<3;i++){
+	for(int i=0;i<12;i++){
 		black[i]=new Checker();
+		black[i]->setRow(i);
+		black[i]->setColumn(i);
+		black[i]->setPlayerColor('b');
 	}
-	red[0]->setRow(0);
-	red[0]->setColumn(0);
-	red[0]->setPlayerColor('r');
-	red[1]->setRow(0);
-	red[1]->setColumn(1);
-	red[1]->setPlayerColor('r');
-	red[2]->setRow(0);
-	red[2]->setColumn(2);
-	red[2]->setPlayerColor('r');
-	black[0]->setRow(1);
-	black[0]->setColumn(0);
-	black[0]->setPlayerColor('b');
-	black[1]->setRow(1);
-	black[1]->setColumn(1);
-	black[1]->setPlayerColor('b');
-	black[2]->setRow(1);
-	black[2]->setColumn(2);
-	black[2]->setPlayerColor('b');
 	printf("Created checkers\n");fflush(stdout);
 	pieceMove move=prod->getPlayerMove(red,black);
 	printf("%d\n",move.row);
