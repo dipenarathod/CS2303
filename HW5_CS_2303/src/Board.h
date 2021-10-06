@@ -39,6 +39,8 @@ public:
 	bool canMove(int, int);
 	int computer(Checker**);
 	bool mustJump();
+	void resetBoardEdges();
+	void checkAndMakeKing();
 	Checker* findChecker(int, int);
 	Checker** red;
 	Checker** black;
