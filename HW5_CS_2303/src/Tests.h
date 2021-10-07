@@ -36,6 +36,9 @@ public:
 	//Test cases for methods in Production
 	bool testGetPlayerMove();
 
+	bool testIsValid();
+	bool testCanJump();
+
 
 };
 

@@ -36,10 +36,22 @@ bool Tests::tests()
 	bool ok9= testMoveBackDiagonalLeft();
 	bool ok10= testMoveBackDiagonalRight();
 
+<<<<<<< Updated upstream
 	bool ok11=testGetPlayerMove();
 	bool ok12=testIsWin();
 
 	answer = ok1 &&ok3 && ok4 && ok6 && ok7 && ok8 && ok10 && ok11 && ok12;
+=======
+	bool ok11 = this->testGetPlayerMove();
+
+	bool ok14 = this->testIsValid();
+
+	bool ok15 = this->testCanJump();
+
+
+	answer = ok1 &&ok3 && ok4 && ok6 && ok7 && ok8 && ok10 && ok11 && ok14 && ok15;
+	//answer=ok11;
+>>>>>>> Stashed changes
 	return answer;
 }
 
@@ -385,6 +397,7 @@ bool Tests::testGetPlayerMove(){
 	}
 }
 
+<<<<<<< Updated upstream
 bool Tests::testIsWin(){
 	bool ok1=false;
 	Board* theBoard=new Board();
@@ -415,3 +428,67 @@ bool Tests::testIsWin(){
 	}
 
 }
+=======
+
+bool Tests::testIsValid(){
+	bool ok = false;
+
+	pieceMove test;
+	test.row = 1;
+	test.col = 1;
+	test.move = 'i';
+
+	if(test.move == 'i'){
+		test.row += 1;
+		test.col -= 1;
+		if((test.row >= 0 && test.row <= 7) && (test.col >= 0 && test.col <= 7)){
+			printf("testIsValid passes\n");fflush(stdout);
+			ok = true;
+		}
+		else{
+			printf("testIsValid did not pass\n");fflush(stdout);
+			ok = false;
+		}
+	}
+
+	return ok;
+}
+
+
+bool Tests::testCanJump(){
+	bool ok = true;
+	Production* prod=new Production();
+	Checker** redCheckers=new Checker*[12];
+	for(int i=0;i<12;i++){
+		redCheckers[i]=(Checker*)0;
+	}
+	Checker** blackCheckers=new Checker*[12];
+	for(int i=0;i<12;i++){
+		blackCheckers[i]=(Checker*)0;
+	}
+	Board* theBoard = new Board();
+	prod->readFile("testCanJump.txt", theBoard,redCheckers,blackCheckers); //read the file
+	puts("Back from read file"); fflush(stdout);
+
+	pieceMove test;
+	test.row = 5;
+	test.col = 2;
+	test.move = 'o';
+	theBoard->red = redCheckers;
+	theBoard->black = blackCheckers;
+	test.piece = theBoard->findChecker(5, 2);
+
+	ok = theBoard->canJump(test);
+
+	if(ok){
+		printf("testCanJump passes\n");fflush(stdout);
+	}
+	else{
+		printf("testCanJump did not pass\n");fflush(stdout);
+	}
+
+	return ok;
+}
+
+
+>>>>>>> Stashed changes

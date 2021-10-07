@@ -1,5 +1,6 @@
 #include "Checker.h"
-
+#ifndef PIECEMOVE
+#define PIECEMOVE
 struct pieceMove{
 	int row;
 	int col;
@@ -7,3 +8,4 @@ struct pieceMove{
 	Checker* piece;
 };
 
+#endif
