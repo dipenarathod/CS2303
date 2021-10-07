@@ -407,119 +407,232 @@ Checker* Board::findChecker(int row, int col) {
 	}
 	return NULL;
 }
-int Board::computer(Checker** red)
+int Board::computer(Checker** red, Checker** black)
 {
 	bool mustJump = this->mustJump();
+	if(this->redTest){
+		for (int i = 0; i < 12; i++)
+			{
+				pieceMove iMove;
+				iMove.row = red[i]->getRow();
+				iMove.col = red[i]->getCol();
+				iMove.piece = red[i];
+				iMove.move = 'i';
+				if(iMove.piece->getRow() == -1 || iMove.piece->getCol() == -1){
+					return 0;
+				}
 
-	for (int i = 0; i < 12; i++)
-	{
-		pieceMove iMove;
-		iMove.row = red[i]->getRow();
-		iMove.col = red[i]->getCol();
-		iMove.piece = red[i];
-		iMove.move = 'i';
-		if(iMove.piece->getRow() == -1 || iMove.piece->getCol() == -1){
-			return 0;
-		}
-
-		pieceMove oMove;
-		oMove.row = red[i]->getRow();
-		oMove.col = red[i]->getCol();
-		oMove.piece = red[i];
-		oMove.move = 'o';
+				pieceMove oMove;
+				oMove.row = red[i]->getRow();
+				oMove.col = red[i]->getCol();
+				oMove.piece = red[i];
+				oMove.move = 'o';
 
 
-		if (red[i]->isKing)
-		{
-			pieceMove kMove;
-			kMove.row = red[i]->getRow();
-			kMove.col = red[i]->getCol();
-			kMove.piece = red[i];
-			kMove.move = 'k';
+				if (red[i]->isKing)
+				{
+					pieceMove kMove;
+					kMove.row = red[i]->getRow();
+					kMove.col = red[i]->getCol();
+					kMove.piece = red[i];
+					kMove.move = 'k';
 
-			pieceMove jMove;
-			jMove.row = red[i]->getRow();
-			jMove.col = red[i]->getCol();
-			jMove.piece = red[i];
-			jMove.move = 'j';
+					pieceMove jMove;
+					jMove.row = red[i]->getRow();
+					jMove.col = red[i]->getCol();
+					jMove.piece = red[i];
+					jMove.move = 'j';
 
-			if (this->canJump(iMove))
-			{
-				std::cout << "The Computer Jumped a piece\n";
-				return 0;
+					if (this->canJump(iMove))
+					{
+						std::cout << "The Computer Jumped a piece\n";
+						return 0;
+					}
+					if (this->canJump(oMove))
+					{
+						std::cout << "The Computer Jumped a piece\n";
+						return 0;
+					}
+					if (this->canJump(kMove))
+					{
+						std::cout << "The Computer Jumped a piece\n";
+						return 0;
+					}
+					if (this->canJump(jMove))
+					{
+						std::cout << "The Computer Jumped a piece\n";
+						return 0;
+					}
+					if (this->isValid(iMove) && mustJump == false)
+					{
+						std::cout << "The computer moved the piece (" << red[i]->getRow() << ", " << red[i]->getCol() << ") to ";
+						red[i]->moveDiagonalLeft();
+						std::cout << "(" << red[i]->getRow() << ", " << red[i]->getCol()<< ")" << std::endl;
+						return 0;
+					}
+					if (this->isValid(oMove) && mustJump == false)
+					{
+						std::cout << "The computer moved the piece (" << red[i]->getRow() << ", " << red[i]->getCol() << ") to ";
+						red[i]->moveDiagonalRight();
+						std::cout << "(" << red[i]->getRow() << ", " << red[i]->getCol()<< ")" << std::endl;
+						return 0;
+					}
+					if (this->isValid(kMove) && mustJump == false)
+					{
+						std::cout << "The computer moved the piece (" << red[i]->getRow() << ", " << red[i]->getCol() << ") to ";
+						red[i]->moveBackDiagonalRight();
+						std::cout << "(" << red[i]->getRow() << ", " << red[i]->getCol()<< ")" << std::endl;
+						return 0;
+					}
+					if (this->isValid(jMove) && mustJump == false)
+					{
+						std::cout << "The computer moved the piece (" << red[i]->getRow() << ", " << red[i]->getCol() << ") to ";
+						red[i]->moveBackDiagonalLeft();
+						std::cout << "(" << red[i]->getRow() << ", " << red[i]->getCol()<< ")" << std::endl;
+						return 0;
+					}
+				}
+				else
+				{
+					if (this->canJump(iMove))
+					{
+						std::cout << "The Computer Jumped a piece\n";
+						return 0;
+					}
+					if (this->canJump(oMove))
+					{
+						std::cout << "The Computer Jumped a piece\n";
+						return 0;
+					}
+					if (this->isValid(iMove) && (mustJump == false))
+					{
+						std::cout << "The computer moved the piece (" << red[i]->getRow() << ", " << red[i]->getCol() << ") to ";
+						red[i]->moveDiagonalRight();
+						std::cout << "(" << red[i]->getRow() << ", " << red[i]->getCol() << ")" << std::endl;
+						return i;
+					}
+					if (this->isValid(oMove) && (mustJump == false))
+					{
+						std::cout << "The computer moved the piece (" << red[i]->getRow() << ", " << red[i]->getCol() << ") to ";
+						red[i]->moveDiagonalLeft();
+						std::cout << "(" << red[i]->getRow() << ", " << red[i]->getCol()<< ")" << std::endl;
+						return i;
+					}
+				}
 			}
-			if (this->canJump(oMove))
-			{
-				std::cout << "The Computer Jumped a piece\n";
-				return 0;
-			}
-			if (this->canJump(kMove))
-			{
-				std::cout << "The Computer Jumped a piece\n";
-				return 0;
-			}
-			if (this->canJump(jMove))
-			{
-				std::cout << "The Computer Jumped a piece\n";
-				return 0;
-			}
-			if (this->isValid(iMove) && mustJump == false)
-			{
-				std::cout << "The computer moved the piece (" << red[i]->getRow() << ", " << red[i]->getCol() << ") to ";
-				red[i]->moveDiagonalLeft();
-				std::cout << "(" << red[i]->getRow() << ", " << red[i]->getCol()<< ")" << std::endl;
-				return 0;
-			}
-			if (this->isValid(oMove) && mustJump == false)
-			{
-				std::cout << "The computer moved the piece (" << red[i]->getRow() << ", " << red[i]->getCol() << ") to ";
-				red[i]->moveDiagonalRight();
-				std::cout << "(" << red[i]->getRow() << ", " << red[i]->getCol()<< ")" << std::endl;
-				return 0;
-			}
-			if (this->isValid(kMove) && mustJump == false)
-			{
-				std::cout << "The computer moved the piece (" << red[i]->getRow() << ", " << red[i]->getCol() << ") to ";
-				red[i]->moveBackDiagonalRight();
-				std::cout << "(" << red[i]->getRow() << ", " << red[i]->getCol()<< ")" << std::endl;
-				return 0;
-			}
-			if (this->isValid(jMove) && mustJump == false)
-			{
-				std::cout << "The computer moved the piece (" << red[i]->getRow() << ", " << red[i]->getCol() << ") to ";
-				red[i]->moveBackDiagonalLeft();
-				std::cout << "(" << red[i]->getRow() << ", " << red[i]->getCol()<< ")" << std::endl;
-				return 0;
-			}
-		}
-		else
-		{
-			if (this->canJump(iMove))
-			{
-				std::cout << "The Computer Jumped a piece\n";
-				return 0;
-			}
-			if (this->canJump(oMove))
-			{
-				std::cout << "The Computer Jumped a piece\n";
-				return 0;
-			}
-			if (this->isValid(iMove) && (mustJump == false))
-			{
-				std::cout << "The computer moved the piece (" << red[i]->getRow() << ", " << red[i]->getCol() << ") to ";
-				red[i]->moveDiagonalRight();
-				std::cout << "(" << red[i]->getRow() << ", " << red[i]->getCol() << ")" << std::endl;
-				return i;
-			}
-			if (this->isValid(oMove) && (mustJump == false))
-			{
-				std::cout << "The computer moved the piece (" << red[i]->getRow() << ", " << red[i]->getCol() << ") to ";
-				red[i]->moveDiagonalLeft();
-				std::cout << "(" << red[i]->getRow() << ", " << red[i]->getCol()<< ")" << std::endl;
-				return i;
-			}
-		}
 	}
+	else if(this->redTest == false){
+		for (int i = 0; i < 12; i++)
+			{
+				pieceMove iMove;
+				iMove.row = black[i]->getRow();
+				iMove.col = black[i]->getCol();
+				iMove.piece = black[i];
+				iMove.move = 'i';
+				if(iMove.piece->getRow() == -1 || iMove.piece->getCol() == -1){
+					return 0;
+				}
+
+				pieceMove oMove;
+				oMove.row = black[i]->getRow();
+				oMove.col = black[i]->getCol();
+				oMove.piece = black[i];
+				oMove.move = 'o';
+
+
+				if (black[i]->isKing)
+				{
+					pieceMove kMove;
+					kMove.row = black[i]->getRow();
+					kMove.col = black[i]->getCol();
+					kMove.piece = black[i];
+					kMove.move = 'k';
+
+					pieceMove jMove;
+					jMove.row = black[i]->getRow();
+					jMove.col = black[i]->getCol();
+					jMove.piece = black[i];
+					jMove.move = 'j';
+
+					if (this->canJump(iMove))
+					{
+						std::cout << "The Computer Jumped a piece\n";
+						return 0;
+					}
+					if (this->canJump(oMove))
+					{
+						std::cout << "The Computer Jumped a piece\n";
+						return 0;
+					}
+					if (this->canJump(kMove))
+					{
+						std::cout << "The Computer Jumped a piece\n";
+						return 0;
+					}
+					if (this->canJump(jMove))
+					{
+						std::cout << "The Computer Jumped a piece\n";
+						return 0;
+					}
+					if (this->isValid(iMove) && mustJump == false)
+					{
+						std::cout << "The computer moved the piece (" << black[i]->getRow() << ", " << black[i]->getCol() << ") to ";
+						black[i]->moveDiagonalRight();
+						std::cout << "(" << black[i]->getRow() << ", " << black[i]->getCol()<< ")" << std::endl;
+						return 0;
+					}
+					if (this->isValid(oMove) && mustJump == false)
+					{
+						std::cout << "The computer moved the piece (" << black[i]->getRow() << ", " << black[i]->getCol() << ") to ";
+						black[i]->moveDiagonalLeft();
+						std::cout << "(" << black[i]->getRow() << ", " << black[i]->getCol()<< ")" << std::endl;
+						return 0;
+					}
+					if (this->isValid(kMove) && mustJump == false)
+					{
+						std::cout << "The computer moved the piece (" << black[i]->getRow() << ", " << black[i]->getCol() << ") to ";
+						black[i]->moveBackDiagonalLeft();
+						std::cout << "(" << black[i]->getRow() << ", " << black[i]->getCol()<< ")" << std::endl;
+						return 0;
+					}
+					if (this->isValid(jMove) && mustJump == false)
+					{
+						std::cout << "The computer moved the piece (" << black[i]->getRow() << ", " << black[i]->getCol() << ") to ";
+						black[i]->moveBackDiagonalRight();
+						std::cout << "(" << black[i]->getRow() << ", " << black[i]->getCol()<< ")" << std::endl;
+						return 0;
+					}
+				}
+				else
+				{
+					if (this->canJump(iMove))
+					{
+						std::cout << "The Computer Jumped a piece\n";
+						return 0;
+					}
+					if (this->canJump(oMove))
+					{
+						std::cout << "The Computer Jumped a piece\n";
+						return 0;
+					}
+					if (this->isValid(iMove) && (mustJump == false))
+					{
+						std::cout << "The computer moved the piece (" << black[i]->getRow() << ", " << black[i]->getCol() << ") to ";
+						black[i]->moveDiagonalLeft();
+						std::cout << "(" << black[i]->getRow() << ", " << black[i]->getCol() << ")" << std::endl;
+						return i;
+					}
+					if (this->isValid(oMove) && (mustJump == false))
+					{
+						std::cout << "The computer moved the piece (" << black[i]->getRow() << ", " << black[i]->getCol() << ") to ";
+						black[i]->moveDiagonalRight();
+						std::cout << "(" << black[i]->getRow() << ", " << black[i]->getCol()<< ")" << std::endl;
+						return i;
+					}
+				}
+			}
+	}
+
 	return 0;
 }
 

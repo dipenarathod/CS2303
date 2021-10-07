@@ -70,9 +70,12 @@ bool Production::prod(int argc, char* argv[])
 
 		theBoard->red = redCheckers;
 		theBoard->black = blackCheckers;
+		theBoard->redTest = this->amGoingFirst;
+
 		if(this->amGoingFirst){
 
 			while(!theBoard->isWin()){
+				std::cout << "Player is going first\n";
 				theBoard->displayBoard();
 				//printf("%d\n",redCheckers[0]->getCol());fflush(stdout);
 				pieceMove move=getPlayerMove(redCheckers,blackCheckers);
@@ -94,17 +97,20 @@ bool Production::prod(int argc, char* argv[])
 						move.piece->moveBackDiagonalRight();
 					}
 				}
-				else if(theBoard->canJump(move)){}
-				theBoard->computer(redCheckers);
+				else if(theBoard->canJump(move)){if(theBoard->isWin()){break;}}
+				theBoard->printToFile("gameState.txt", redCheckers, blackCheckers);
+				theBoard->computer(redCheckers, blackCheckers);
 				theBoard->printToFile("gameState.txt", redCheckers, blackCheckers);
 			}
 		}
-		else{
+		else if(this->amGoingFirst == false){
 
 			while(!theBoard->isWin()){
-				theBoard->computer(redCheckers);
-				theBoard->displayBoard();
+				std::cout << "Comp is going first\n";
+				theBoard->computer(redCheckers, blackCheckers);
 				theBoard->printToFile("gameState.txt", redCheckers, blackCheckers);
+				theBoard->displayBoard();
+
 
 				printf("%d\n",redCheckers[0]->getCol());fflush(stdout);
 				pieceMove move=getPlayerMove(redCheckers,blackCheckers);
@@ -127,7 +133,7 @@ bool Production::prod(int argc, char* argv[])
 					}
 				}
 				else if(theBoard->canJump(move)){if(theBoard->isWin()){break;}}
-
+				theBoard->printToFile("gameState.txt", redCheckers, blackCheckers);
 			}
 		}
 

@@ -44,6 +44,7 @@ public:
 	Checker* findChecker(int, int);
 	Checker** red;
 	Checker** black;
+	bool redTest = true;
 
 private:
 	char* edgesP;
