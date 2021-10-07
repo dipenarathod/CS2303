@@ -32,9 +32,10 @@ public:
 	bool testMoveDiagonalRight();
 	bool testMoveBackDiagonalLeft();
 	bool testMoveBackDiagonalRight();
-
+	bool testIsWin();
 	//Test cases for methods in Production
 	bool testGetPlayerMove();
+
 
 };
 
