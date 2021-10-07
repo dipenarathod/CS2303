@@ -36,10 +36,10 @@ bool Tests::tests()
 	bool ok9= testMoveBackDiagonalLeft();
 	bool ok10= testMoveBackDiagonalRight();
 
-	bool ok11=this->testGetPlayerMove();
+	bool ok11=testGetPlayerMove();
+	bool ok12=testIsWin();
 
-	//answer = ok1 &&ok3 && ok4 && ok6 && ok7 && ok8 && ok10 && ok11;
-	answer=ok11;
+	answer = ok1 &&ok3 && ok4 && ok6 && ok7 && ok8 && ok10 && ok11 && ok12;
 	return answer;
 }
 
@@ -383,4 +383,35 @@ bool Tests::testGetPlayerMove(){
 		printf("getPlayerMove fails\n");fflush(stdout);
 		return false;
 	}
+}
+
+bool Tests::testIsWin(){
+	bool ok1=false;
+	Board* theBoard=new Board();
+	theBoard->setEdgesP((char*) malloc(8 * 8 *sizeof(char)));
+	theBoard->init();
+	Production* prod=new Production();
+	Checker** red=new Checker*[12];
+	Checker** black=new Checker*[12];
+	prod->readFile("singleBlackChecker.txt",theBoard,red,black);
+	ok1=theBoard->isWin();
+
+	bool ok2=false;
+	Board* theBoard2=new Board();
+	theBoard->setEdgesP((char*) malloc(8 * 8 *sizeof(char)));
+	theBoard->init();
+	Production* prod2=new Production();
+	Checker** red2=new Checker*[12];
+	Checker** black2=new Checker*[12];
+	prod->readFile("singleRedChecker.txt",theBoard2,red2,black2);
+	ok2=theBoard2->isWin();
+	if(ok1||ok2){
+		printf("testIsWin passes\n");fflush(stdout);
+		return true;
+	}
+	else{
+		printf("testIsWin fails\n");fflush(stdout);
+		return true;
+	}
+
 }
