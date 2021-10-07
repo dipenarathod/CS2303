@@ -36,12 +36,8 @@ bool Tests::tests()
 	bool ok9= testMoveBackDiagonalLeft();
 	bool ok10= testMoveBackDiagonalRight();
 
-<<<<<<< Updated upstream
-	bool ok11=testGetPlayerMove();
 	bool ok12=testIsWin();
 
-	answer = ok1 &&ok3 && ok4 && ok6 && ok7 && ok8 && ok10 && ok11 && ok12;
-=======
 	bool ok11 = this->testGetPlayerMove();
 
 	bool ok14 = this->testIsValid();
@@ -49,9 +45,8 @@ bool Tests::tests()
 	bool ok15 = this->testCanJump();
 
 
-	answer = ok1 &&ok3 && ok4 && ok6 && ok7 && ok8 && ok10 && ok11 && ok14 && ok15;
+	answer = ok1 &&ok3 && ok4 && ok6 && ok7 && ok8 && ok10 && ok11 && ok12 && ok14 && ok15;
 	//answer=ok11;
->>>>>>> Stashed changes
 	return answer;
 }
 
@@ -397,7 +392,6 @@ bool Tests::testGetPlayerMove(){
 	}
 }
 
-<<<<<<< Updated upstream
 bool Tests::testIsWin(){
 	bool ok1=false;
 	Board* theBoard=new Board();
@@ -428,7 +422,6 @@ bool Tests::testIsWin(){
 	}
 
 }
-=======
 
 bool Tests::testIsValid(){
 	bool ok = false;
@@ -489,6 +482,3 @@ bool Tests::testCanJump(){
 
 	return ok;
 }
-
-
->>>>>>> Stashed changes
