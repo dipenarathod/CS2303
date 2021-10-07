@@ -37,7 +37,7 @@ public:
 	bool canJump(pieceMove);
 	bool isValid(pieceMove);
 	bool canMove(int, int);
-	int computer(Checker**);
+	int computer(Checker**, Checker**);
 	bool mustJump();
 	void resetBoardEdges();
 	void checkAndMakeKing();
